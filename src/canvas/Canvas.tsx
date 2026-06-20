@@ -63,8 +63,7 @@ export default function Canvas() {
   }, []);
 
   const onNodeDoubleClick = useCallback((_: unknown, node: Node) => {
-    const next = window.prompt("Rename node", node.id);
-    if (next) appStore.getState().renameNode(node.id, next.trim());
+    appStore.getState().setRenaming(node.id);
   }, []);
 
   return (

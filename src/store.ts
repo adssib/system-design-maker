@@ -14,6 +14,7 @@ export interface AppState {
   flowText: string;
   positions: Record<string, { x: number; y: number }>;
   selection: string | null;
+  renaming: string | null;
   structure: StructureParseResult;
   flow: FlowParseResult;
   validation: ValidationError[];
@@ -33,6 +34,7 @@ export interface AppState {
   renameNode: (oldId: string, nextId: string) => void;
   moveNode: (id: string, x: number, y: number) => void;
   select: (id: string | null) => void;
+  setRenaming: (id: string | null) => void;
   autoArrange: () => void;
   load: (structureText: string, flowText: string, positions: Record<string, { x: number; y: number }>) => void;
 }
@@ -68,6 +70,7 @@ export function createAppStore() {
       flowText: "",
       positions: {},
       selection: null,
+      renaming: null,
       structure: empty(),
       flow: { name: null, steps: [], errors: [] },
       validation: [],
@@ -134,6 +137,8 @@ export function createAppStore() {
       moveNode: (id, x, y) => set({ positions: { ...get().positions, [id]: { x, y } } }),
 
       select: (id) => set({ selection: id }),
+
+      setRenaming: (id) => set({ renaming: id }),
 
       autoArrange: () => {
         const { nodes, edges } = get().structure;

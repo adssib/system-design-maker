@@ -1,7 +1,8 @@
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect } from "react";
 import {
-  ReactFlow, Background, Controls, type Node, type Edge,
-  type NodeChange, applyNodeChanges, type Connection,
+  ReactFlow, Background, Controls,
+  useNodesState, useEdgesState,
+  type Node, type Edge, type NodeChange, type Connection,
 } from "@xyflow/react";
 import { useAppStore, appStore } from "../store";
 import SystemNode from "./SystemNode";
@@ -12,40 +13,50 @@ const nodeTypes = { system: SystemNode };
 export default function Canvas() {
   const structure = useAppStore((s) => s.structure);
   const positions = useAppStore((s) => s.positions);
-  const selection = useAppStore((s) => s.selection);
 
-  const nodes: Node[] = useMemo(
-    () =>
-      structure.nodes.map((n) => ({
-        id: n.id,
-        type: "system",
-        position: positions[n.id] ?? { x: 0, y: 0 },
-        selected: selection === n.id,
-        data: { label: n.id, type: n.type },
-      })),
-    [structure.nodes, positions, selection]
-  );
+  // React Flow owns its node/edge objects so it can persist measured dimensions
+  // (a node without `measured` renders visibility:hidden). The store stays the
+  // source of truth for *structure*; we sync it in via effects below.
+  const [nodes, setNodes, onNodesChange] = useNodesState<Node>([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
 
-  const edges: Edge[] = useMemo(
-    () =>
-      structure.edges.map((e) => ({
-        id: `${e.from}->${e.to}`,
-        source: e.from,
-        target: e.to,
-        type: "default",
-      })),
-    [structure.edges]
-  );
+  // store structure + positions -> React Flow nodes, preserving `measured`
+  // for ids that survive so they stay visible across re-syncs.
+  useEffect(() => {
+    setNodes((prev) => {
+      const prevById = new Map(prev.map((n) => [n.id, n]));
+      return structure.nodes.map((n) => {
+        const existing = prevById.get(n.id);
+        const node: Node = {
+          id: n.id,
+          type: "system",
+          position: positions[n.id] ?? existing?.position ?? { x: 0, y: 0 },
+          data: { label: n.id, type: n.type },
+        };
+        if (existing?.measured) node.measured = existing.measured;
+        return node;
+      });
+    });
+  }, [structure.nodes, positions, setNodes]);
 
-  const onNodesChange = useCallback((changes: NodeChange[]) => {
-    // we only care about position + selection; apply against current nodes then push back
-    const next = applyNodeChanges(changes, nodes);
-    for (const n of next) {
-      const p = n.position;
-      appStore.getState().moveNode(n.id, p.x, p.y);
-      if (n.selected) appStore.getState().select(n.id);
+  useEffect(() => {
+    setEdges(structure.edges.map((e) => ({
+      id: `${e.from}->${e.to}`, source: e.from, target: e.to,
+    })));
+  }, [structure.edges, setEdges]);
+
+  // apply RF changes (incl. dimensions/selection) into RF state, and mirror
+  // selection into the store.
+  const handleNodesChange = useCallback((changes: NodeChange[]) => {
+    onNodesChange(changes);
+    for (const c of changes) {
+      if (c.type === "select") appStore.getState().select(c.selected ? c.id : null);
     }
-  }, [nodes]);
+  }, [onNodesChange]);
+
+  const onNodeDragStop = useCallback((_: unknown, node: Node) => {
+    appStore.getState().moveNode(node.id, node.position.x, node.position.y);
+  }, []);
 
   const onConnect = useCallback((c: Connection) => {
     if (c.source && c.target) appStore.getState().addEdge(c.source, c.target);
@@ -62,7 +73,9 @@ export default function Canvas() {
         nodes={nodes}
         edges={edges}
         nodeTypes={nodeTypes}
-        onNodesChange={onNodesChange}
+        onNodesChange={handleNodesChange}
+        onEdgesChange={onEdgesChange}
+        onNodeDragStop={onNodeDragStop}
         onConnect={onConnect}
         onNodeDoubleClick={onNodeDoubleClick}
         onPaneClick={() => appStore.getState().select(null)}

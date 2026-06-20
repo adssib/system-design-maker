@@ -5,23 +5,22 @@ body { background: var(--bg); color: var(--text); font: 14px/1.4 ui-sans-serif, 
 .app { display: flex; height: 100%; }
 
 .sysnode { position: relative; width: 150px; height: 52px; padding: 6px 12px 6px 15px; border-radius: 12px;
-  background: linear-gradient(180deg, #f5eee0, #e8ddc7); border: 1px solid #4a3a28; color: #241a10;
-  display: flex; align-items: center; gap: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, .38);
+  border: 1px solid; display: flex; align-items: center; gap: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, .42);
   transition: box-shadow .15s ease, border-color .15s ease; }
 .sysnode-bar { position: absolute; left: 0; top: 6px; bottom: 6px; width: 5px; border-radius: 0 3px 3px 0; }
 .sysnode-icon { display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; flex: 0 0 24px; }
 .sysnode-icon img { display: block; object-fit: contain; }
 .sysnode-text { display: flex; flex-direction: column; min-width: 0; }
-.sysnode-label { font-weight: 700; font-size: 13px; line-height: 1.15; color: #241a10; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.sysnode-type { font-size: 10px; color: #8a7758; text-transform: uppercase; letter-spacing: .05em; font-weight: 600; }
-.sysnode.lit { box-shadow: 0 0 0 2px #e2a85e, 0 0 20px -2px rgba(226, 168, 94, .7); }
+.sysnode-label { font-weight: 700; font-size: 13px; line-height: 1.15; color: inherit; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sysnode-type { font-size: 10px; color: inherit; opacity: .62; text-transform: uppercase; letter-spacing: .05em; font-weight: 600; }
+.sysnode.lit { box-shadow: 0 0 0 2px #ee8b43, 0 0 22px -2px rgba(238, 139, 67, .75); }
 
 .canvas { flex: 1; height: 100%; }
 
 .editors { display: flex; flex-direction: column; flex: 1; min-height: 0; }
 .tabs { display: flex; gap: 4px; }
 .tabs button { flex: 1; padding: 6px; background: transparent; color: var(--muted); border: 0; cursor: pointer; border-radius: 6px 6px 0 0; }
-.tabs button.active { color: var(--text); border-bottom: 2px solid #e2a85e; }
+.tabs button.active { color: var(--text); border-bottom: 2px solid #ee8b43; }
 .code-editor { position: relative; flex: 1; min-height: 0; margin-top: 6px;
   border: 1px solid #34291d; border-radius: 8px; overflow: hidden; background: #120e0a; }
 .code-pre, .code-ta { position: absolute; inset: 0; margin: 0; padding: 10px; border: 0;
@@ -30,7 +29,7 @@ body { background: var(--bg); color: var(--text); font: 14px/1.4 ui-sans-serif, 
 .code-ta { background: transparent; color: transparent; caret-color: #f2e9d8; resize: none; outline: none; }
 .code-ta::placeholder { color: #6b5e4c; }
 .tok-comment { color: #7c6f5a; font-style: italic; }
-.tok-verb { color: #e2a85e; font-weight: 600; }
+.tok-verb { color: #ee8b43; font-weight: 600; }
 .tok-string { color: #cbb189; }
 .tok-label { color: #cf9a86; }
 .tok-keyword { color: #d9b56a; font-weight: 600; }
@@ -47,8 +46,8 @@ body { background: var(--bg); color: var(--text); font: 14px/1.4 ui-sans-serif, 
 .react-flow__controls-button:hover { background: #2a2018; }
 .react-flow__controls-button svg { fill: #d6c4a4; max-width: 13px; max-height: 13px; }
 .react-flow__attribution { background: transparent; color: #6b5e4c; }
-.react-flow__handle { background: #e2a85e; border: 1px solid #15110d; width: 7px; height: 7px; }
+.react-flow__handle { background: #ee8b43; border: 1px solid #15110d; width: 7px; height: 7px; }
 .react-flow__edge-path { stroke: #4a3e2e; stroke-width: 1.5; }
 .react-flow__edge.selected .react-flow__edge-path,
-.react-flow__edge:hover .react-flow__edge-path { stroke: #e2a85e; }
-.react-flow__connectionline .react-flow__edge-path { stroke: #e2a85e; }
+.react-flow__edge:hover .react-flow__edge-path { stroke: #ee8b43; }
+.react-flow__connectionline .react-flow__edge-path { stroke: #ee8b43; }

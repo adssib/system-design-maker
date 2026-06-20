@@ -23,7 +23,7 @@ export default function AddComponent() {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant="secondary" className="w-full justify-start gap-2">
+        <Button variant="secondary" className="flex-1 justify-start gap-2">
           <Plus /> Add component
         </Button>
       </PopoverTrigger>

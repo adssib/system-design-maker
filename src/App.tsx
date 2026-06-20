@@ -126,24 +126,10 @@ export default function App() {
           <aside className="flex h-full w-[360px] flex-col gap-3 border-r border-border bg-card p-3.5">
             <div className="flex items-center justify-between">
               <h1 className="flex items-center gap-2 text-[15px] font-semibold">
-                <span className="size-2.5 rounded-full bg-primary shadow-[0_0_10px] shadow-primary" />
+                <img src={`${import.meta.env.BASE_URL}favicon.svg`} alt="" width={20} height={20} />
                 system-design-maker
               </h1>
-              <div className="flex items-center gap-1.5">
-                <HelpDialog />
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <button
-                      onClick={() => appStore.getState().setPaletteOpen(true)}
-                      className="flex items-center gap-1.5 rounded-md border border-border bg-background px-2 py-1 text-[11px] text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
-                    >
-                      <Search className="size-3" />
-                      <span className="font-sans">⌘K</span>
-                    </button>
-                  </TooltipTrigger>
-                  <TooltipContent>Command palette — actions, add components, jump to nodes</TooltipContent>
-                </Tooltip>
-              </div>
+              <HelpDialog />
             </div>
 
             <div className="flex gap-2">
@@ -164,7 +150,22 @@ export default function App() {
               )}
             </div>
 
-            <AddComponent />
+            <div className="flex gap-2">
+              <AddComponent />
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="secondary"
+                    size="icon"
+                    aria-label="Search / command palette"
+                    onClick={() => appStore.getState().setPaletteOpen(true)}
+                  >
+                    <Search />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>Search components &amp; commands (⌘K)</TooltipContent>
+              </Tooltip>
+            </div>
 
             <Editors />
 

@@ -3,3 +3,11 @@
 html, body, #root { height: 100%; margin: 0; }
 body { background: var(--bg); color: var(--text); font: 14px/1.4 ui-sans-serif, system-ui, sans-serif; }
 .app { display: flex; height: 100%; }
+
+.sysnode { position: relative; width: 132px; height: 50px; padding: 6px 10px; border-radius: 11px;
+  background: #131a2b; border: 1px solid #3a465f; color: var(--text); display: flex;
+  flex-direction: column; justify-content: center; }
+.sysnode-bar { position: absolute; left: 0; top: 6px; bottom: 6px; width: 5px; border-radius: 3px; }
+.sysnode-label { font-weight: 600; }
+.sysnode-type { font-size: 11px; color: var(--muted); }
+.sysnode.lit { filter: brightness(1.6); }

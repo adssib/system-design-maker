@@ -2,7 +2,7 @@ import { toPng, toCanvas } from "html-to-image";
 import { getNodesBounds, getViewportForBounds, type Node } from "@xyflow/react";
 import { GIFEncoder, quantize, applyPalette } from "gifenc";
 
-const BG = "#15110d";
+const BG = "#232019";
 
 function download(url: string, filename: string) {
   const a = document.createElement("a");

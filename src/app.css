@@ -1,4 +1,4 @@
-:root { --bg: #15110d; --panel: #1d1711; --text: #f2e9d8; --muted: #b8a98e; }
+:root { --bg: #232019; --panel: #2c2820; --text: #f2e9d8; --muted: #b8a98e; }
 * { box-sizing: border-box; }
 html, body, #root { height: 100%; margin: 0; }
 body { background: var(--bg); color: var(--text); font: 14px/1.4 ui-sans-serif, system-ui, sans-serif; }
@@ -22,7 +22,7 @@ body { background: var(--bg); color: var(--text); font: 14px/1.4 ui-sans-serif, 
 .tabs button { flex: 1; padding: 6px; background: transparent; color: var(--muted); border: 0; cursor: pointer; border-radius: 6px 6px 0 0; }
 .tabs button.active { color: var(--text); border-bottom: 2px solid #8b6fd6; }
 .code-editor { position: relative; flex: 1; min-height: 0; margin-top: 6px;
-  border: 1px solid #34291d; border-radius: 8px; overflow: hidden; background: #120e0a; }
+  border: 1px solid #453d32; border-radius: 8px; overflow: hidden; background: #1b1813; }
 .code-pre, .code-ta { position: absolute; inset: 0; margin: 0; padding: 10px; border: 0;
   font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; white-space: pre; overflow: auto; tab-size: 2; }
 .code-pre { color: var(--text); pointer-events: none; }
@@ -39,15 +39,15 @@ body { background: var(--bg); color: var(--text); font: 14px/1.4 ui-sans-serif, 
 .error { color: #e6927e; font-size: 12px; padding: 2px 0; }
 
 /* --- React Flow theming (Tailwind Preflight strips its defaults; restore + warm) --- */
-.react-flow__controls { border-radius: 8px; overflow: hidden; border: 1px solid #34291d;
+.react-flow__controls { border-radius: 8px; overflow: hidden; border: 1px solid #453d32;
   box-shadow: 0 6px 16px rgba(0, 0, 0, .45); }
-.react-flow__controls-button { background: #1d1711; border-bottom: 1px solid #34291d;
+.react-flow__controls-button { background: #2c2820; border-bottom: 1px solid #453d32;
   width: 26px; height: 26px; }
-.react-flow__controls-button:hover { background: #2a2018; }
+.react-flow__controls-button:hover { background: #3a3329; }
 .react-flow__controls-button svg { fill: #d6c4a4; max-width: 13px; max-height: 13px; }
-.react-flow__attribution { background: transparent; color: #6b5e4c; }
-.react-flow__handle { background: #8b6fd6; border: 1px solid #15110d; width: 7px; height: 7px; }
-.react-flow__edge-path { stroke: #4a3e2e; stroke-width: 1.5; }
+.react-flow__attribution { background: transparent; color: #7c6e58; }
+.react-flow__handle { background: #8b6fd6; border: 1px solid #232019; width: 7px; height: 7px; }
+.react-flow__edge-path { stroke: #6f6354; stroke-width: 1.5; }
 .react-flow__edge.selected .react-flow__edge-path,
 .react-flow__edge:hover .react-flow__edge-path { stroke: #8b6fd6; }
 .react-flow__connectionline .react-flow__edge-path { stroke: #8b6fd6; }

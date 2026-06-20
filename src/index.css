@@ -5,24 +5,24 @@
 /* Dark-only WARM palette (espresso base, beige/amber accents, cream text).
    shadcn tokens as HSL triples. */
 :root {
-  --background: 30 24% 7%;        /* #15110d espresso */
+  --background: 36 17% 12%;       /* #232019 warm charcoal (lighter) */
   --foreground: 39 50% 90%;       /* #f2e9d8 cream */
-  --card: 30 26% 9%;              /* #1d1711 */
+  --card: 40 16% 15%;             /* #2c2820 */
   --card-foreground: 39 50% 90%;
-  --popover: 30 26% 9%;
+  --popover: 40 16% 15%;
   --popover-foreground: 39 50% 90%;
   --primary: 256 56% 64%;         /* #8b6fd6 violet (buttons) */
   --primary-foreground: 0 0% 100%; /* white text on violet */
-  --secondary: 31 28% 16%;        /* #34291d brown */
+  --secondary: 34 14% 20%;        /* #3a3329 */
   --secondary-foreground: 39 40% 88%;
-  --muted: 31 26% 12%;
+  --muted: 36 15% 16%;
   --muted-foreground: 38 23% 64%; /* #b8a98e taupe */
   --accent: 256 56% 64%;          /* #8b6fd6 violet */
   --accent-foreground: 0 0% 100%;
   --destructive: 7 62% 57%;       /* warm red */
   --destructive-foreground: 39 50% 95%;
-  --border: 32 29% 18%;           /* #3a2e20 */
-  --input: 32 29% 18%;
+  --border: 33 16% 23%;           /* #453d32 */
+  --input: 33 16% 23%;
   --ring: 256 56% 64%;
   --radius: 0.6rem;
 }

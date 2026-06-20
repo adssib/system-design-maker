@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from "react";
 import {
   ReactFlow, Background, Controls,
-  useNodesState, useEdgesState,
+  useNodesState, useEdgesState, MarkerType,
   type Node, type Edge, type NodeChange, type Connection,
 } from "@xyflow/react";
 import { useAppStore, appStore } from "../store";
@@ -42,7 +42,12 @@ export default function Canvas() {
 
   useEffect(() => {
     setEdges(structure.edges.map((e) => ({
-      id: `${e.from}->${e.to}`, source: e.from, target: e.to,
+      id: `${e.from}->${e.to}`,
+      source: e.from,
+      target: e.to,
+      // inline stroke + marker so the edge survives html-to-image (PNG/GIF) export
+      style: { stroke: "#9a8c78", strokeWidth: 1.6 },
+      markerEnd: { type: MarkerType.ArrowClosed, color: "#9a8c78", width: 18, height: 18 },
     })));
   }, [structure.edges, setEdges]);
 

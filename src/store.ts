@@ -18,6 +18,13 @@ export interface AppState {
   flow: FlowParseResult;
   validation: ValidationError[];
 
+  playToken: number;
+  playAt: number;
+  speed: number;
+  setSpeed: (v: number) => void;
+  play: () => void;
+  stop: () => void;
+
   setStructureText: (t: string) => void;
   setFlowText: (t: string) => void;
   addNode: (x: number, y: number) => string;
@@ -64,6 +71,13 @@ export function createAppStore() {
       structure: empty(),
       flow: { name: null, steps: [], errors: [] },
       validation: [],
+
+      playToken: 0,
+      playAt: 0,
+      speed: 240,
+      setSpeed: (v) => set({ speed: v }),
+      play: () => set({ playToken: get().playToken + 1, playAt: performance.now() }),
+      stop: () => set({ playToken: 0 }),
 
       setStructureText: (t) => {
         const structure = parseStructure(t);

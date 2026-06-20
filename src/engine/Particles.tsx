@@ -5,7 +5,7 @@ import { compileFlow } from "./interpreter";
 import { TYPES } from "./typeInference";
 import type { ParticleEvent } from "../types";
 
-const NODE_W = 132, NODE_H = 50;
+const NODE_W = 150, NODE_H = 52;
 
 function centerRight(p: { x: number; y: number }) { return { x: p.x + NODE_W, y: p.y + NODE_H / 2 }; }
 function centerLeft(p: { x: number; y: number }) { return { x: p.x, y: p.y + NODE_H / 2 }; }

@@ -4,13 +4,16 @@ html, body, #root { height: 100%; margin: 0; }
 body { background: var(--bg); color: var(--text); font: 14px/1.4 ui-sans-serif, system-ui, sans-serif; }
 .app { display: flex; height: 100%; }
 
-.sysnode { position: relative; width: 132px; height: 50px; padding: 6px 10px; border-radius: 11px;
-  background: #131a2b; border: 1px solid #3a465f; color: var(--text); display: flex;
-  flex-direction: column; justify-content: center; }
-.sysnode-bar { position: absolute; left: 0; top: 6px; bottom: 6px; width: 5px; border-radius: 3px; }
-.sysnode-label { font-weight: 600; }
-.sysnode-type { font-size: 11px; color: var(--muted); }
-.sysnode.lit { filter: brightness(1.6); }
+.sysnode { position: relative; width: 150px; height: 52px; padding: 6px 12px 6px 15px; border-radius: 12px;
+  background: linear-gradient(180deg, #161f33, #111829); border: 1px solid #3a465f; color: var(--text);
+  display: flex; align-items: center; gap: 10px; transition: box-shadow .15s ease, border-color .15s ease; }
+.sysnode-bar { position: absolute; left: 0; top: 7px; bottom: 7px; width: 5px; border-radius: 0 3px 3px 0; }
+.sysnode-icon { display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; flex: 0 0 24px; }
+.sysnode-icon img { display: block; object-fit: contain; }
+.sysnode-text { display: flex; flex-direction: column; min-width: 0; }
+.sysnode-label { font-weight: 600; font-size: 13px; line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sysnode-type { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+.sysnode.lit { filter: brightness(1.55); }
 
 .canvas { flex: 1; height: 100%; }
 

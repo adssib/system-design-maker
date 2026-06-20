@@ -46,3 +46,31 @@ export function iconFor(name: string, type: NodeType): IconDesc {
   if (file) return { kind: "img", src: `${import.meta.env.BASE_URL}icons/${file}.svg`, alt: file };
   return { kind: "lucide", Icon: categoryIcon[type] };
 }
+
+// Insertable components. `id` is the node name inserted — it drives the icon and
+// category through iconFor/typeOf, so there is no duplicated icon/color data here.
+// `aliases` only widen search matching (cmdk filters on the item's value).
+export interface Component { id: string; label: string; aliases?: string[]; }
+
+export const COMPONENTS: Component[] = [
+  { id: "client", label: "Client", aliases: ["user", "browser", "frontend"] },
+  { id: "gateway", label: "API Gateway", aliases: ["ingress"] },
+  { id: "load-balancer", label: "Load Balancer", aliases: ["lb", "balancer", "proxy"] },
+  { id: "service", label: "Service", aliases: ["api", "backend", "microservice"] },
+  { id: "worker", label: "Worker", aliases: ["job", "consumer"] },
+  { id: "cache", label: "Cache" },
+  { id: "queue", label: "Queue", aliases: ["message queue", "broker"] },
+  { id: "db", label: "Database", aliases: ["database", "sql"] },
+  { id: "redis", label: "Redis", aliases: ["cache"] },
+  { id: "postgres", label: "PostgreSQL", aliases: ["postgresql", "psql"] },
+  { id: "mysql", label: "MySQL", aliases: ["mariadb"] },
+  { id: "mongodb", label: "MongoDB", aliases: ["mongo", "nosql"] },
+  { id: "sqlite", label: "SQLite" },
+  { id: "kafka", label: "Apache Kafka", aliases: ["stream", "events"] },
+  { id: "rabbitmq", label: "RabbitMQ", aliases: ["rabbit", "amqp"] },
+  { id: "nginx", label: "NGINX", aliases: ["reverse proxy", "web server"] },
+  { id: "elasticsearch", label: "Elasticsearch", aliases: ["search", "elastic"] },
+  { id: "docker", label: "Docker", aliases: ["container"] },
+  { id: "kubernetes", label: "Kubernetes", aliases: ["k8s", "orchestration"] },
+  { id: "graphql", label: "GraphQL" },
+];

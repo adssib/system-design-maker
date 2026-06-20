@@ -39,6 +39,14 @@ describe("app store", () => {
     expect(s.structureText).toContain("front -> b");
   });
 
+  it("inserts a node from a catalog base name, with unique suffixes", () => {
+    store.getState().setStructureText("a -> b");
+    const id = store.getState().addNode(100, 100, "redis");
+    expect(id).toBe("redis");
+    expect(store.getState().structure.nodes.find((n) => n.id === "redis")!.type).toBe("cache");
+    expect(store.getState().addNode(120, 120, "redis")).toBe("redis2");
+  });
+
   it("validates the flow against the structure", () => {
     store.getState().setStructureText("a -> b");
     store.getState().setFlowText('flow "x":\n  a -> z');

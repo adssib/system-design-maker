@@ -28,7 +28,7 @@ export interface AppState {
 
   setStructureText: (t: string) => void;
   setFlowText: (t: string) => void;
-  addNode: (x: number, y: number) => string;
+  addNode: (x: number, y: number, base?: string) => string;
   addEdge: (from: string, to: string) => void;
   deleteNode: (id: string) => void;
   renameNode: (oldId: string, nextId: string) => void;
@@ -93,10 +93,10 @@ export function createAppStore() {
         set({ flowText: t, flow, validation: revalidate(get().structure, flow) });
       },
 
-      addNode: (x, y) => {
+      addNode: (x, y, base = "service") => {
         const taken = new Set(get().structure.nodes.map((n) => n.id));
-        let id = "service", i = 1;
-        while (taken.has(id)) id = `service${++i}`;
+        let id = base, i = 1;
+        while (taken.has(id)) id = `${base}${++i}`;
         const nodes = [...get().structure.nodes, { id, type: typeOf(id) }];
         const next = { ...get().positions, [id]: { x, y } };
         set({ positions: next });

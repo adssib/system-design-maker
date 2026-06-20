@@ -18,6 +18,7 @@ import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/comp
 import { Toaster } from "@/components/ui/sonner";
 import RenameDialog from "@/components/RenameDialog";
 import CommandPalette from "@/components/CommandPalette";
+import AddComponent from "@/components/AddComponent";
 
 function IconButton({ label, onClick, children, variant = "secondary" }: {
   label: string; onClick: () => void; children: React.ReactNode;
@@ -139,6 +140,8 @@ export default function App() {
                 </IconButton>
               )}
             </div>
+
+            <AddComponent />
 
             <Editors />
 

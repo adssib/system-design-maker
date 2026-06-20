@@ -11,19 +11,19 @@
   --card-foreground: 39 50% 90%;
   --popover: 30 26% 9%;
   --popover-foreground: 39 50% 90%;
-  --primary: 25 83% 60%;          /* #ee8b43 amber-orange (buttons) */
-  --primary-foreground: 28 60% 10%; /* dark brown text on orange */
+  --primary: 256 56% 64%;         /* #8b6fd6 violet (buttons) */
+  --primary-foreground: 0 0% 100%; /* white text on violet */
   --secondary: 31 28% 16%;        /* #34291d brown */
   --secondary-foreground: 39 40% 88%;
   --muted: 31 26% 12%;
   --muted-foreground: 38 23% 64%; /* #b8a98e taupe */
-  --accent: 25 83% 60%;           /* #ee8b43 amber-orange */
-  --accent-foreground: 28 60% 10%;
+  --accent: 256 56% 64%;          /* #8b6fd6 violet */
+  --accent-foreground: 0 0% 100%;
   --destructive: 7 62% 57%;       /* warm red */
   --destructive-foreground: 39 50% 95%;
   --border: 32 29% 18%;           /* #3a2e20 */
   --input: 32 29% 18%;
-  --ring: 25 83% 60%;
+  --ring: 256 56% 64%;
   --radius: 0.6rem;
 }
 

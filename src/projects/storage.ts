@@ -32,6 +32,14 @@ export async function deleteProject(id: string): Promise<void> {
   await set(KEY, all.filter((x) => x.id !== id));
 }
 
+export async function examplesSeeded(): Promise<boolean> {
+  return (await get<boolean>("sdm:seeded")) ?? false;
+}
+
+export async function markExamplesSeeded(): Promise<void> {
+  await set("sdm:seeded", true);
+}
+
 export async function getLastProjectId(): Promise<string | null> {
   return (await get<string>(LAST)) ?? null;
 }

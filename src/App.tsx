@@ -8,7 +8,7 @@ import Editors from "./editor/Editors";
 import { EXAMPLES, type Example } from "./examples";
 import {
   newProject, listProjects, saveProject, deleteProject,
-  getLastProjectId, setLastProjectId,
+  getLastProjectId, setLastProjectId, examplesSeeded, markExamplesSeeded,
 } from "./projects/storage";
 import type { Project } from "./types";
 import { decodeShare } from "./share/url";
@@ -48,6 +48,15 @@ export default function App() {
   // boot
   useEffect(() => {
     (async () => {
+      // seed the example projects once — also for users whose storage predates them
+      if (!(await examplesSeeded())) {
+        for (const ex of EXAMPLES) {
+          await saveProject({ ...newProject(ex.name), structureText: ex.structureText, flowText: ex.flowText });
+        }
+        await markExamplesSeeded();
+        toast("New here? Click the ? for a 30-second guide.", { duration: 6000 });
+      }
+
       const shared = decodeShare(location.hash);
       let all = await listProjects();
       let active: Project;
@@ -59,18 +68,7 @@ export default function App() {
         toast.success("Imported shared design");
       } else {
         const lastId = await getLastProjectId();
-        const found = all.find((p) => p.id === lastId);
-        if (found) active = found;
-        else if (all.length) active = all[0];
-        else {
-          // first run: seed the example templates
-          for (const ex of EXAMPLES) {
-            await saveProject({ ...newProject(ex.name), structureText: ex.structureText, flowText: ex.flowText });
-          }
-          all = await listProjects();
-          active = all[0];
-          toast("New here? Click the ? for a 30-second guide.", { duration: 6000 });
-        }
+        active = all.find((p) => p.id === lastId) ?? all[0];
       }
       setProjects(all);
       setCurrentId(active.id);

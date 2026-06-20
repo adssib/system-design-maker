@@ -1,0 +1,64 @@
+@startuml architecture
+' system-design-maker — architecture
+' Render:  plantuml -tpng docs/architecture.puml   (also -tsvg)
+
+skinparam backgroundColor #0e1422
+skinparam shadowing false
+skinparam defaultFontName "JetBrains Mono"
+skinparam defaultFontColor #e6edf7
+skinparam ArrowColor #5b9dff
+skinparam ArrowFontColor #8aa0c0
+skinparam rectangleBorderColor #3a465f
+skinparam rectangleBackgroundColor #131a2b
+skinparam rectangleFontColor #e6edf7
+skinparam databaseBackgroundColor #1b2740
+skinparam databaseBorderColor #2c3a59
+skinparam packageBackgroundColor #0b1120
+skinparam packageBorderColor #243049
+skinparam packageFontColor #8aa0c0
+
+title <color:#e6edf7>system-design-maker</color>\n<size:12><color:#8aa0c0>diagram-as-code, but the request actually moves</color></size>
+
+rectangle "**structure.sdl**\n<color:#46d369>client -> gateway</color>\n<color:#46d369>gateway -> [auth, api]</color>" as SDL
+rectangle "**flow.sdl**\n<color:#ff7eb6>gateway <-> auth</color>\n<color:#ff7eb6>api ~> queue</color>" as FDL
+
+package "Pure core  ·  TypeScript, 100% unit-tested" {
+  rectangle "parseStructure" as PS
+  rectangle "parseFlow" as PF
+  rectangle "validate\n<size:10><color:#8aa0c0>flow hop ∈ structure?</color></size>" as VAL
+  rectangle "layeredPositions\n<size:10><color:#8aa0c0>auto-layout</color></size>" as LAY
+  rectangle "compileFlow\n<size:10><color:#ffb454>flow interpreter</color></size>" as CF
+}
+
+rectangle "**Zustand store**\n<size:11><color:#8aa0c0>single source of truth</color></size>" as STORE #1b2740
+
+package "React UI" {
+  rectangle "React Flow canvas\n<size:10><color:#8aa0c0>nodes + edges</color></size>" as RF
+  rectangle "Particle overlay\n<size:10><color:#5b9dff>getPointAtLength + RAF</color></size>" as PART
+  rectangle "Tabbed editors" as ED
+}
+
+database "IndexedDB\n<size:10><color:#8aa0c0>projects (per browser)</color></size>" as IDB
+rectangle "URL hash\n<size:10><color:#8aa0c0>shareable link</color></size>" as URL
+
+SDL --> PS
+FDL --> PF
+PS --> VAL
+PF --> VAL
+PS --> LAY
+PF --> CF
+PS --> STORE
+PF --> STORE
+VAL --> STORE
+LAY --> STORE
+STORE --> RF
+STORE --> ED
+ED --> STORE
+CF --> PART : timed events
+RF ..> PART : edge geometry
+STORE <--> IDB
+STORE <--> URL
+
+footer <color:#8aa0c0>static SPA · no backend · auto-deployed to GitHub Pages via Actions</color>
+
+@enduml

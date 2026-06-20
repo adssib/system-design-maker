@@ -1,33 +1,102 @@
+<div align="center">
+
 # system-design-maker
 
-Diagram-as-code, but the request actually moves. Define a system in a **structure** file and
-how one request behaves in a **flow** file; watch the request animate through the diagram.
+### Diagram-as-code — but the request *actually moves*.
 
-## Develop
-- `npm install`
-- `npm run dev` — local dev server (served at `/`)
-- `npm test` — unit tests (Vitest)
-- `npm run build` — type-check + static production build to `dist/`
+Define a system in two small text files and watch a real request animate through it,
+hop by hop, like stepping a debugger across your architecture.
+
+[**▶ Live demo**](https://adssib.github.io/system-design-maker/) &nbsp;·&nbsp;
+[Architecture](#architecture) &nbsp;·&nbsp;
+[The DSL](#the-dsl) &nbsp;·&nbsp;
+[Develop](#develop)
+
+[![Deploy](https://github.com/adssib/system-design-maker/actions/workflows/deploy.yml/badge.svg)](https://github.com/adssib/system-design-maker/actions/workflows/deploy.yml)
+&nbsp;![no backend](https://img.shields.io/badge/backend-none-46d369)
+&nbsp;![TypeScript](https://img.shields.io/badge/TypeScript-strict-5b9dff)
+
+</div>
+
+---
+
+## Why
+
+Mermaid and D2 draw *static* boxes. Drag-and-drop tools animate a "press play" flow that's just
+decoration. Nobody treats **the request lifecycle as a first-class, authored thing**.
+
+system-design-maker splits a system into **two files** — the way engineers actually think:
+
+- **`structure`** — *what the system is.* Components and the connections that are possible.
+- **`flow`** — *how one request behaves.* An ordered, timed trace. **Line order = time order.**
+
+The structure renders the diagram. The flow compiles into timed particles that travel the edges —
+out-and-back round-trips, fire-and-forget async, the works. Every flow hop is validated against the
+structure, so a request that takes an impossible path is a *teaching error*, not a silent lie.
+
+## The DSL
+
+**structure** — type is inferred from the name (or annotate it `name : type`):
+
+```
+client  -> gateway
+gateway -> [auth, api]
+api     -> [cache, db]
+api     -> queue
+queue   -> worker
+worker  -> db
+```
+
+**flow** — one request, top to bottom:
+
+```
+flow "GET /profile":
+  client  -> gateway
+  gateway <-> auth      # round-trip: out, then back
+  gateway -> api
+  api     <-> db        # fetch
+  api     ~> queue      # async, fire-and-forget (doesn't block)
+```
+
+| verb | meaning | clock |
+|------|---------|-------|
+| `->`  | one-way call           | advances |
+| `<->` | call **and** response  | advances by both legs |
+| `~>`  | async / fire-and-forget| does **not** advance |
+| `(label)` | rides the particle as a tag (`hit`, `miss`, `429`…) | — |
 
 ## Architecture
-- **No backend.** Pure static SPA: React + Vite + TypeScript, React Flow for the canvas,
-  a custom SVG particle overlay for the animated request flow.
-- **Storage is client-side.** Projects live in the visitor's browser via **IndexedDB** — the data
-  never touches a server. It is per-browser and per-device; clearing browser data clears it.
-- **Sharing** is via a URL hash that encodes the two files (no shared database).
 
-## Deploy — GitHub Pages (CI/CD)
-This repo auto-deploys to **GitHub Pages** through GitHub Actions on every push to `main`
-(`.github/workflows/deploy.yml`: install → test → build → publish `dist/`).
+A pure, fully unit-tested core (parsers, validator, layout, flow interpreter) feeds a single
+Zustand store. React Flow draws the graph; a custom SVG overlay animates the request on top.
 
-Live: **https://adssib.github.io/system-design-maker/**
+![architecture](docs/architecture.png)
 
-Notes:
-- The Vite `base` is `/system-design-maker/` for production builds so asset URLs resolve under the
-  project-page subpath (see `vite.config.ts`). For a different repo name, a user/org page, or a
-  custom domain, change `base` accordingly (`/` for a root domain).
-- One-time repo setting: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+<sub>Diagram is authored as PlantUML — see [`docs/architecture.puml`](docs/architecture.puml).</sub>
 
-### Other static hosts
-Because the build is just static files, `dist/` also deploys as-is to Netlify, Cloudflare Pages,
-or Vercel — set those to serve from the repo root and they need no `base` override.
+## Storage (no backend, on purpose)
+
+Everything is a static SPA. Your projects live in the **browser's IndexedDB** — they survive a
+refresh, support multiple projects, and never touch a server. Storage is per-browser/per-device;
+sharing happens through a **URL hash** that encodes both files, not a shared database.
+
+## Develop
+
+```bash
+npm install
+npm run dev      # local dev server
+npm test         # Vitest unit suite (parsers, interpreter, store, storage, share)
+npm run build    # type-check + static build to dist/
+```
+
+## Deploy
+
+Pushes to `main` auto-deploy to **GitHub Pages** via GitHub Actions
+([`.github/workflows/deploy.yml`](.github/workflows/deploy.yml): install → test → build → publish).
+The Vite `base` is `/system-design-maker/` for the project-page subpath; change it in
+`vite.config.ts` for a different repo name, a user page, or a custom domain. Because the output is
+just static files, `dist/` also drops onto Netlify, Cloudflare Pages, or Vercel unchanged.
+
+## Tech
+
+React · Vite · TypeScript (strict) · [@xyflow/react](https://reactflow.dev) · Zustand · idb-keyval · Vitest

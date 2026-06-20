@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="791px" preserveAspectRatio="none" style="width:752px;height:791px;background:#0E1422;" version="1.1" viewBox="0 0 752 791" width="752px" zoomAndPan="magnify"><defs/><g><text fill="#E6EDF7" font-family="JetBrains Mono" font-size="18" lengthAdjust="spacingAndGlyphs" textLength="189" x="285" y="16.708">system-design-maker</text><text fill="#8AA0C0" font-family="JetBrains Mono" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="308" x="225.5" y="32.0918">diagram-as-code, but the request actually moves</text><!--MD5=[86198a6050aba358c4618d1f957d70c0]
+cluster Pure core  ·  TypeScript, 100% unit-tested--><polygon fill="#0B1120" points="22,159.4219,362,159.4219,369,181.7188,488,181.7188,488,355.4219,22,355.4219,22,159.4219" style="stroke: #243049; stroke-width: 1.5;"/><line style="stroke: #243049; stroke-width: 1.5;" x1="22" x2="369" y1="181.7188" y2="181.7188"/><text fill="#8AA0C0" font-family="JetBrains Mono" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="334" x="26" y="174.417">Pure core  ·  TypeScript, 100% unit-tested</text><!--MD5=[adfa38f4f1b7476a3f593681b8bc0f43]
+cluster React UI--><polygon fill="#0B1120" points="255,514.4219,325,514.4219,332,536.7188,595,536.7188,595,742.9219,255,742.9219,255,514.4219" style="stroke: #243049; stroke-width: 1.5;"/><line style="stroke: #243049; stroke-width: 1.5;" x1="255" x2="332" y1="536.7188" y2="536.7188"/><text fill="#8AA0C0" font-family="JetBrains Mono" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="64" x="259" y="529.417">React UI</text><!--MD5=[7842cb4300efb401920d8f72ebe921e6]
+entity PS--><rect fill="#131A2B" height="36.2969" style="stroke: #3A465F; stroke-width: 1.5;" width="123" x="346.5" y="194.4219"/><text fill="#E6EDF7" font-family="JetBrains Mono" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="103" x="356.5" y="217.417">parseStructure</text><!--MD5=[307c39d1f50341806731232204082462]
+entity PF--><rect fill="#131A2B" height="36.2969" style="stroke: #3A465F; stroke-width: 1.5;" width="90" x="179" y="194.4219"/><text fill="#E6EDF7" font-family="JetBrains Mono" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="70" x="189" y="217.417">parseFlow</text><!--MD5=[669688ed79f70020b9301ba1dfb97d55]
+entity VAL--><rect fill="#131A2B" height="47.9375" style="stroke: #3A465F; stroke-width: 1.5;" width="125" x="178.5" y="291.4219"/><text fill="#E6EDF7" font-family="JetBrains Mono" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="52" x="188.5" y="314.417">validate</text><text fill="#8AA0C0" font-family="JetBrains Mono" font-size="10" lengthAdjust="spacingAndGlyphs" textLength="105" x="188.5" y="327.001">flow hop ∈ structure?</text><!--MD5=[39a9d0bf8f060857ca696f107988f73b]
+entity LAY--><rect fill="#131A2B" height="47.9375" style="stroke: #3A465F; stroke-width: 1.5;" width="133" x="338.5" y="291.4219"/><text fill="#E6EDF7" font-family="JetBrains Mono" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="113" x="348.5" y="314.417">layeredPositions</text><text fill="#8AA0C0" font-family="JetBrains Mono" font-size="10" lengthAdjust="spacingAndGlyphs" textLength="56" x="348.5" y="327.001">auto-layout</text><!--MD5=[def1ebe1b81388e86d861dee1613fad9]
+entity CF--><rect fill="#131A2B" height="47.9375" style="stroke: #3A465F; stroke-width: 1.5;" width="105" x="38.5" y="291.4219"/><text fill="#E6EDF7" font-family="JetBrains Mono" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="85" x="48.5" y="314.417">compileFlow</text><text fill="#FFB454" font-family="JetBrains Mono" font-size="10" lengthAdjust="spacingAndGlyphs" textLength="75" x="48.5" y="327.001">flow interpreter</text><!--MD5=[26db52ab9c1c9ce671d7de92d530c650]
+entity RF--><rect fill="#131A2B" height="47.9375" style="stroke: #3A465F; stroke-width: 1.5;" width="147" x="271.5" y="549.4219"/><text fill="#E6EDF7" font-family="JetBrains Mono" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="127" x="281.5" y="572.417">React Flow canvas</text><text fill="#8AA0C0" font-family="JetBrains Mono" font-size="10" lengthAdjust="spacingAndGlyphs" textLength="72" x="281.5" y="585.001">nodes + edges</text><!--MD5=[c3698d9ff75dde8f369d6fd394df1437]
+entity PART--><rect fill="#131A2B" height="47.9375" style="stroke: #3A465F; stroke-width: 1.5;" width="140" x="273" y="678.9219"/><text fill="#E6EDF7" font-family="JetBrains Mono" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="102" x="283" y="701.917">Particle overlay</text><text fill="#5B9DFF" font-family="JetBrains Mono" font-size="10" lengthAdjust="spacingAndGlyphs" textLength="120" x="283" y="714.501">getPointAtLength + RAF</text><!--MD5=[39389913e5f82dbd5d7b1801f5ae4f32]
+entity ED--><rect fill="#131A2B" height="36.2969" style="stroke: #3A465F; stroke-width: 1.5;" width="125" x="453.5" y="555.4219"/><text fill="#E6EDF7" font-family="JetBrains Mono" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="105" x="463.5" y="578.417">Tabbed editors</text><!--MD5=[ea7232234d7e06393d4815c65d0eaa7d]
+entity SDL--><rect fill="#131A2B" height="68.8906" style="stroke: #3A465F; stroke-width: 1.5;" width="171" x="328.5" y="43.4219"/><text fill="#E6EDF7" font-family="JetBrains Mono" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="102" x="338.5" y="66.417">structure.sdl</text><text fill="#46D369" font-family="JetBrains Mono" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="119" x="338.5" y="82.7139">client -&gt; gateway</text><text fill="#46D369" font-family="JetBrains Mono" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="151" x="338.5" y="99.0107">gateway -&gt; [auth, api]</text><!--MD5=[a310c038dbdaf2a61b7af94eeda76bbd]
+entity FDL--><rect fill="#131A2B" height="68.8906" style="stroke: #3A465F; stroke-width: 1.5;" width="145" x="148.5" y="43.4219"/><text fill="#E6EDF7" font-family="JetBrains Mono" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="62" x="158.5" y="66.417">flow.sdl</text><text fill="#FF7EB6" font-family="JetBrains Mono" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="125" x="158.5" y="82.7139">gateway &lt;-&gt; auth</text><text fill="#FF7EB6" font-family="JetBrains Mono" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="97" x="158.5" y="99.0107">api ~&gt; queue</text><!--MD5=[e47fa06001d3545761002d272ada9cd9]
+entity STORE--><rect fill="#1B2740" height="49.1016" style="stroke: #3A465F; stroke-width: 1.5;" width="143" x="403.5" y="402.4219"/><text fill="#E6EDF7" font-family="JetBrains Mono" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="112" x="413.5" y="425.417">Zustand store</text><text fill="#8AA0C0" font-family="JetBrains Mono" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="123" x="413.5" y="438.9292">single source of truth</text><!--MD5=[0b2727990a395ea2c6d1bd35a097b3f6]
+entity IDB--><path d="M613.5,554.9219 C613.5,544.9219 677,544.9219 677,544.9219 C677,544.9219 740.5,544.9219 740.5,554.9219 L740.5,591.8594 C740.5,601.8594 677,601.8594 677,601.8594 C677,601.8594 613.5,601.8594 613.5,591.8594 L613.5,554.9219 " fill="#1B2740" style="stroke: #2C3A59; stroke-width: 1.5;"/><path d="M613.5,554.9219 C613.5,564.9219 677,564.9219 677,564.9219 C677,564.9219 740.5,564.9219 740.5,554.9219 " fill="none" style="stroke: #2C3A59; stroke-width: 1.5;"/><text fill="#E6EDF7" font-family="JetBrains Mono" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="76" x="623.5" y="581.917">IndexedDB</text><text fill="#8AA0C0" font-family="JetBrains Mono" font-size="10" lengthAdjust="spacingAndGlyphs" textLength="107" x="623.5" y="594.501">projects (per browser)</text><!--MD5=[157cb91ba4353f23c1cb4318427a1af7]
+entity URL--><rect fill="#131A2B" height="47.9375" style="stroke: #3A465F; stroke-width: 1.5;" width="85" x="151.5" y="549.4219"/><text fill="#E6EDF7" font-family="JetBrains Mono" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="65" x="161.5" y="572.417">URL hash</text><text fill="#8AA0C0" font-family="JetBrains Mono" font-size="10" lengthAdjust="spacingAndGlyphs" textLength="65" x="161.5" y="585.001">shareable link</text><!--MD5=[c29db6d1701007826316d29355ec6e50]
+link SDL to PS--><path d="M412.47,112.7019 C411.38,136.7319 409.95,168.3419 409,189.2419 " fill="none" id="SDL-&gt;PS" style="stroke: #5B9DFF; stroke-width: 1.0;"/><polygon fill="#5B9DFF" points="408.77,194.3119,413.1768,185.5039,408.9983,189.3171,405.1852,185.1386,408.77,194.3119" style="stroke: #5B9DFF; stroke-width: 1.0;"/><!--MD5=[527e6a3e5613d9583bd2728d3c456bb4]
+link FDL to PF--><path d="M221.76,112.7019 C222.31,136.7319 223.02,168.3419 223.5,189.2419 " fill="none" id="FDL-&gt;PF" style="stroke: #5B9DFF; stroke-width: 1.0;"/><polygon fill="#5B9DFF" points="223.61,194.3119,227.4033,185.2228,223.4957,189.3132,219.4054,185.4056,223.61,194.3119" style="stroke: #5B9DFF; stroke-width: 1.0;"/><!--MD5=[6bd7f0c4876f191167442aadf309b6d2]
+link PS to VAL--><path d="M379.67,230.5519 C353.33,246.4919 313.72,270.4419 283.58,288.6719 " fill="none" id="PS-&gt;VAL" style="stroke: #5B9DFF; stroke-width: 1.0;"/><polygon fill="#5B9DFF" points="279.2,291.3219,288.9725,290.0975,283.4812,288.7389,284.8397,283.2476,279.2,291.3219" style="stroke: #5B9DFF; stroke-width: 1.0;"/><!--MD5=[6ad84af0e106ddb922933bfd3461939d]
+link PF to VAL--><path d="M226.88,230.5519 C229.42,245.6519 233.18,267.9519 236.18,285.7619 " fill="none" id="PF-&gt;VAL" style="stroke: #5B9DFF; stroke-width: 1.0;"/><polygon fill="#5B9DFF" points="237.08,291.1319,239.537,281.5944,236.2534,286.2007,231.6471,282.917,237.08,291.1319" style="stroke: #5B9DFF; stroke-width: 1.0;"/><!--MD5=[bee5895c4329cc77add475d0bce70d6a]
+link PS to LAY--><path d="M407.49,230.5519 C407.04,245.6519 406.38,267.9519 405.85,285.7619 " fill="none" id="PS-&gt;LAY" style="stroke: #5B9DFF; stroke-width: 1.0;"/><polygon fill="#5B9DFF" points="405.69,291.1319,409.9454,282.2498,405.8328,286.1339,401.9487,282.0213,405.69,291.1319" style="stroke: #5B9DFF; stroke-width: 1.0;"/><!--MD5=[7f1a547b245fa734bc4e321050cfc2e8]
+link PF to CF--><path d="M201.44,230.5519 C180.7,246.3019 149.64,269.8919 125.74,288.0419 " fill="none" id="PF-&gt;CF" style="stroke: #5B9DFF; stroke-width: 1.0;"/><polygon fill="#5B9DFF" points="121.67,291.1319,131.256,288.8716,125.6511,288.1068,126.4159,282.5019,121.67,291.1319" style="stroke: #5B9DFF; stroke-width: 1.0;"/><!--MD5=[979233f740aa0e529f0b2f38b8e34c5d]
+link PS to STORE--><path d="M469.52,217.4119 C499.22,222.8119 532.38,234.7019 551,260.4219 C580.19,300.7419 573.93,328.2419 551,372.4219 C545.54,382.9519 536.95,391.8419 527.47,399.1719 " fill="none" id="PS-&gt;STORE" style="stroke: #5B9DFF; stroke-width: 1.0;"/><polygon fill="#5B9DFF" points="523.37,402.2119,532.9787,400.0503,527.382,399.2279,528.2043,393.6311,523.37,402.2119" style="stroke: #5B9DFF; stroke-width: 1.0;"/><!--MD5=[d15b01dddfd7eefb585bbd892d5c6446]
+link PF to STORE--><path d="M269.1,220.1219 C337.57,231.3219 462.61,256.1419 489,291.4219 C511.8,321.9019 500.11,367.7119 488.47,397.2219 " fill="none" id="PF-&gt;STORE" style="stroke: #5B9DFF; stroke-width: 1.0;"/><polygon fill="#5B9DFF" points="486.45,402.1719,493.5427,395.3386,488.3315,397.5394,486.1307,392.3282,486.45,402.1719" style="stroke: #5B9DFF; stroke-width: 1.0;"/><!--MD5=[5b4e7c5c45cda5f674ff446f9cfd98d6]
+link VAL to STORE--><path d="M277.82,339.5719 C291.19,347.5619 306.55,356.2919 321,363.4219 C348.28,376.8819 379.22,389.8619 406.16,400.4619 " fill="none" id="VAL-&gt;STORE" style="stroke: #5B9DFF; stroke-width: 1.0;"/><polygon fill="#5B9DFF" points="411.15,402.4119,404.2345,395.3993,406.4959,400.5845,401.3107,402.8459,411.15,402.4119" style="stroke: #5B9DFF; stroke-width: 1.0;"/><!--MD5=[7da511727a2f0186c98dcf22f94881da]
+link LAY to STORE--><path d="M419.85,339.6419 C430.72,356.6619 445.54,379.8319 457.08,397.8819 " fill="none" id="LAY-&gt;STORE" style="stroke: #5B9DFF; stroke-width: 1.0;"/><polygon fill="#5B9DFF" points="459.93,402.3519,458.4664,392.6124,457.2428,398.1353,451.7199,396.9118,459.93,402.3519" style="stroke: #5B9DFF; stroke-width: 1.0;"/><!--MD5=[f9d0f80c0eef718cf8c695a75c35dd2d]
+link STORE to RF--><path d="M453.82,451.4619 C430.65,477.2219 393.55,518.4519 369.23,545.4919 " fill="none" id="STORE-&gt;RF" style="stroke: #5B9DFF; stroke-width: 1.0;"/><polygon fill="#5B9DFF" points="365.74,549.3719,374.7339,545.3581,369.0848,545.6554,368.7875,540.0064,365.74,549.3719" style="stroke: #5B9DFF; stroke-width: 1.0;"/><!--MD5=[a8ab4b2d1c6ce8d033d9c76a352342b7]
+link STORE to ED--><path d="M481.68,451.4619 C489.42,478.7519 502.09,523.4019 509.68,550.1419 " fill="none" id="STORE-&gt;ED" style="stroke: #5B9DFF; stroke-width: 1.0;"/><polygon fill="#5B9DFF" points="511.12,555.2419,512.4936,545.4893,509.7464,550.4343,504.8014,547.687,511.12,555.2419" style="stroke: #5B9DFF; stroke-width: 1.0;"/><!--MD5=[d31bccdd78d8cfebba0348b74e1df8c1]
+link ED to STORE--><path d="M512.39,555.1719 C508.41,536.7619 501.56,506.8119 494,481.4219 C491.56,473.2119 488.58,464.4019 485.72,456.3519 " fill="none" id="ED-&gt;STORE" style="stroke: #5B9DFF; stroke-width: 1.0;"/><polygon fill="#5B9DFF" points="483.95,451.4519,483.2497,461.2758,485.6507,456.1538,490.7727,458.5547,483.95,451.4519" style="stroke: #5B9DFF; stroke-width: 1.0;"/><!--MD5=[d60d9d63fcbfe562997822d3584d2ae7]
+link CF to PART--><path d="M87.76,339.4719 C81.7,391.7619 74.22,521.1319 134,601.9219 C166.09,645.2919 221.91,670.6619 267.8,684.9919 " fill="none" id="CF-&gt;PART" style="stroke: #5B9DFF; stroke-width: 1.0;"/><polygon fill="#5B9DFF" points="272.78,686.5119,265.3584,680.0373,268.002,685.0384,263.0009,687.682,272.78,686.5119" style="stroke: #5B9DFF; stroke-width: 1.0;"/><text fill="#8AA0C0" font-family="JetBrains Mono" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="84" x="93" y="494.4888">timed events</text><!--MD5=[3ab844c81e5ce61a9ef20c167344d9d9]
+link RF to PART--><path d="M344.64,597.5119 C344.3,618.8619 343.8,650.6519 343.45,673.5419 " fill="none" id="RF-&gt;PART" style="stroke: #5B9DFF; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#5B9DFF" points="343.37,678.5719,347.5237,669.6418,343.4557,673.5726,339.5249,669.5046,343.37,678.5719" style="stroke: #5B9DFF; stroke-width: 1.0;"/><text fill="#8AA0C0" font-family="JetBrains Mono" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="98" x="345" y="644.9888">edge geometry</text><!--MD5=[78dbbaccc5194d42a8fad34b4c88af20]
+link STORE to IDB--><path d="M517.48,454.2719 C540.75,469.0619 569.88,488.1619 595,506.4219 C610,517.3319 626,529.9619 639.84,541.2319 " fill="none" id="STORE-IDB" style="stroke: #5B9DFF; stroke-width: 1.0;"/><polygon fill="#5B9DFF" points="644.07,544.6919,639.6232,535.9041,640.1951,541.5319,634.5673,542.1039,644.07,544.6919" style="stroke: #5B9DFF; stroke-width: 1.0;"/><polygon fill="#5B9DFF" points="513.21,451.5619,518.6626,459.7636,517.4307,454.2426,522.9517,453.0106,513.21,451.5619" style="stroke: #5B9DFF; stroke-width: 1.0;"/><!--MD5=[560c689f53746d4b51a8321645c5fd5d]
+link STORE to URL--><path d="M398.3,445.4819 C353.99,457.9519 298.58,477.6419 255,506.4219 C239.31,516.7919 224.87,532.0219 213.98,545.2419 " fill="none" id="STORE-URL" style="stroke: #5B9DFF; stroke-width: 1.0;"/><polygon fill="#5B9DFF" points="210.72,549.2719,219.4899,544.7898,213.8643,545.3843,213.2698,539.7588,210.72,549.2719" style="stroke: #5B9DFF; stroke-width: 1.0;"/><polygon fill="#5B9DFF" points="403.37,444.0819,393.6262,442.647,398.5538,445.4253,395.7756,450.3529,403.37,444.0819" style="stroke: #5B9DFF; stroke-width: 1.0;"/><text fill="#8AA0C0" font-family="JetBrains Mono" font-size="10" lengthAdjust="spacingAndGlyphs" textLength="331" x="214" y="778.2041">static SPA · no backend · auto-deployed to GitHub Pages via Actions</text><!--MD5=[be01c2b3f11f880eae28051b004cc69b]
+@startuml architecture
+
+skinparam backgroundColor #0e1422
+skinparam shadowing false
+skinparam defaultFontName "JetBrains Mono"
+skinparam defaultFontColor #e6edf7
+skinparam ArrowColor #5b9dff
+skinparam ArrowFontColor #8aa0c0
+skinparam rectangleBorderColor #3a465f
+skinparam rectangleBackgroundColor #131a2b
+skinparam rectangleFontColor #e6edf7
+skinparam databaseBackgroundColor #1b2740
+skinparam databaseBorderColor #2c3a59
+skinparam packageBackgroundColor #0b1120
+skinparam packageBorderColor #243049
+skinparam packageFontColor #8aa0c0
+
+title <color:#e6edf7>system-design-maker</color>\n<size:12><color:#8aa0c0>diagram-as-code, but the request actually moves</color></size>
+
+rectangle "**structure.sdl**\n<color:#46d369>client -> gateway</color>\n<color:#46d369>gateway -> [auth, api]</color>" as SDL
+rectangle "**flow.sdl**\n<color:#ff7eb6>gateway <-> auth</color>\n<color:#ff7eb6>api ~> queue</color>" as FDL
+
+package "Pure core  ·  TypeScript, 100% unit-tested" {
+  rectangle "parseStructure" as PS
+  rectangle "parseFlow" as PF
+  rectangle "validate\n<size:10><color:#8aa0c0>flow hop ∈ structure?</color></size>" as VAL
+  rectangle "layeredPositions\n<size:10><color:#8aa0c0>auto-layout</color></size>" as LAY
+  rectangle "compileFlow\n<size:10><color:#ffb454>flow interpreter</color></size>" as CF
+}
+
+rectangle "**Zustand store**\n<size:11><color:#8aa0c0>single source of truth</color></size>" as STORE #1b2740
+
+package "React UI" {
+  rectangle "React Flow canvas\n<size:10><color:#8aa0c0>nodes + edges</color></size>" as RF
+  rectangle "Particle overlay\n<size:10><color:#5b9dff>getPointAtLength + RAF</color></size>" as PART
+  rectangle "Tabbed editors" as ED
+}
+
+database "IndexedDB\n<size:10><color:#8aa0c0>projects (per browser)</color></size>" as IDB
+rectangle "URL hash\n<size:10><color:#8aa0c0>shareable link</color></size>" as URL
+
+SDL - -> PS
+FDL - -> PF
+PS - -> VAL
+PF - -> VAL
+PS - -> LAY
+PF - -> CF
+PS - -> STORE
+PF - -> STORE
+VAL - -> STORE
+LAY - -> STORE
+STORE - -> RF
+STORE - -> ED
+ED - -> STORE
+CF - -> PART : timed events
+RF ..> PART : edge geometry
+STORE <- -> IDB
+STORE <- -> URL
+
+footer <color:#8aa0c0>static SPA · no backend · auto-deployed to GitHub Pages via Actions</color>
+
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 05:22:07 EST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.11+10-1-24.04.2-Ubuntu
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>

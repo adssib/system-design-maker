@@ -1,0 +1,33 @@
+import { useState } from "react";
+import { useAppStore, appStore } from "../store";
+
+export default function Editors() {
+  const [tab, setTab] = useState<"structure" | "flow">("structure");
+  const structureText = useAppStore((s) => s.structureText);
+  const flowText = useAppStore((s) => s.flowText);
+  const structure = useAppStore((s) => s.structure);
+  const flow = useAppStore((s) => s.flow);
+  const validation = useAppStore((s) => s.validation);
+
+  const isStructure = tab === "structure";
+  const value = isStructure ? structureText : flowText;
+  const onChange = (v: string) =>
+    isStructure ? appStore.getState().setStructureText(v) : appStore.getState().setFlowText(v);
+
+  const errors = isStructure ? structure.errors : [...flow.errors, ...validation];
+
+  return (
+    <div className="editors">
+      <div className="tabs">
+        <button className={isStructure ? "active" : ""} onClick={() => setTab("structure")}>Structure</button>
+        <button className={!isStructure ? "active" : ""} onClick={() => setTab("flow")}>Flow</button>
+      </div>
+      <textarea spellCheck={false} value={value} onChange={(e) => onChange(e.target.value)} />
+      <div className="errors">
+        {errors.map((er, i) => (
+          <div key={i} className="error">⚠ line {er.line}: {er.message}</div>
+        ))}
+      </div>
+    </div>
+  );
+}

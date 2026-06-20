@@ -13,3 +13,12 @@ body { background: var(--bg); color: var(--text); font: 14px/1.4 ui-sans-serif, 
 .sysnode.lit { filter: brightness(1.6); }
 
 .canvas { flex: 1; height: 100%; }
+
+.editors { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+.tabs { display: flex; gap: 4px; }
+.tabs button { flex: 1; padding: 6px; background: var(--panel); color: var(--muted); border: 0; cursor: pointer; }
+.tabs button.active { color: var(--text); border-bottom: 2px solid #5b9dff; }
+.editors textarea { flex: 1; min-height: 0; resize: none; background: #0b1120; color: var(--text);
+  border: 1px solid #243049; border-radius: 8px; padding: 10px; font: 13px/1.5 ui-monospace, monospace; margin-top: 6px; }
+.errors { max-height: 120px; overflow: auto; }
+.error { color: #ff9b9b; font-size: 12px; padding: 2px 0; }

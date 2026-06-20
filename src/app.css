@@ -22,8 +22,20 @@ body { background: var(--bg); color: var(--text); font: 14px/1.4 ui-sans-serif, 
 .tabs { display: flex; gap: 4px; }
 .tabs button { flex: 1; padding: 6px; background: transparent; color: var(--muted); border: 0; cursor: pointer; border-radius: 6px 6px 0 0; }
 .tabs button.active { color: var(--text); border-bottom: 2px solid #e2a85e; }
-.editors textarea { flex: 1; min-height: 0; resize: none; background: #120e0a; color: var(--text);
-  border: 1px solid #34291d; border-radius: 8px; padding: 10px; font: 13px/1.5 ui-monospace, monospace; margin-top: 6px; }
+.code-editor { position: relative; flex: 1; min-height: 0; margin-top: 6px;
+  border: 1px solid #34291d; border-radius: 8px; overflow: hidden; background: #120e0a; }
+.code-pre, .code-ta { position: absolute; inset: 0; margin: 0; padding: 10px; border: 0;
+  font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; white-space: pre; overflow: auto; tab-size: 2; }
+.code-pre { color: var(--text); pointer-events: none; }
+.code-ta { background: transparent; color: transparent; caret-color: #f2e9d8; resize: none; outline: none; }
+.code-ta::placeholder { color: #6b5e4c; }
+.tok-comment { color: #7c6f5a; font-style: italic; }
+.tok-verb { color: #e2a85e; font-weight: 600; }
+.tok-string { color: #cbb189; }
+.tok-label { color: #cf9a86; }
+.tok-keyword { color: #d9b56a; font-weight: 600; }
+.tok-punct { color: #b8a98e; }
+.tok-name { color: #f2e9d8; }
 .errors { max-height: 120px; overflow: auto; }
 .error { color: #e6927e; font-size: 12px; padding: 2px 0; }
 

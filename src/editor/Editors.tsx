@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAppStore, appStore } from "../store";
+import CodeEditor from "./CodeEditor";
 
 export default function Editors() {
   const [tab, setTab] = useState<"structure" | "flow">("structure");
@@ -22,7 +23,11 @@ export default function Editors() {
         <button className={isStructure ? "active" : ""} onClick={() => setTab("structure")}>Structure</button>
         <button className={!isStructure ? "active" : ""} onClick={() => setTab("flow")}>Flow</button>
       </div>
-      <textarea spellCheck={false} value={value} onChange={(e) => onChange(e.target.value)} />
+      <CodeEditor
+        value={value}
+        onChange={onChange}
+        placeholder={isStructure ? "client -> gateway" : 'flow "GET /x":\n  client -> gateway'}
+      />
       <div className="errors">
         {errors.map((er, i) => (
           <div key={i} className="error">⚠ line {er.line}: {er.message}</div>

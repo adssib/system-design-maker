@@ -25,13 +25,3 @@ body { background: var(--bg); color: var(--text); font: 14px/1.4 ui-sans-serif, 
   border: 1px solid #243049; border-radius: 8px; padding: 10px; font: 13px/1.5 ui-monospace, monospace; margin-top: 6px; }
 .errors { max-height: 120px; overflow: auto; }
 .error { color: #ff9b9b; font-size: 12px; padding: 2px 0; }
-
-.sidebar { width: 360px; background: var(--panel); padding: 14px; display: flex; flex-direction: column; gap: 10px; height: 100%; }
-.sidebar h1 { font-size: 15px; margin: 0; }
-.projects { display: flex; gap: 6px; }
-.projects select { flex: 1; background: #0b1120; color: var(--text); border: 1px solid #243049; border-radius: 6px; padding: 4px; }
-.transport { display: flex; gap: 6px; }
-.transport button, .projects button { background: #1b2740; color: var(--text); border: 1px solid #2c3a59; border-radius: 6px; padding: 6px 10px; cursor: pointer; }
-.transport .primary { background: #2a5bd7; border-color: #2a5bd7; }
-.row { display: flex; align-items: center; gap: 8px; }
-.row input[type=range] { flex: 1; }

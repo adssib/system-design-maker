@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { ReactFlowProvider } from "@xyflow/react";
 import { toast } from "sonner";
-import { Play, Square, LayoutGrid, Plus, Trash2, Search } from "lucide-react";
+import { Play, Square, LayoutGrid, Trash2, Search } from "lucide-react";
 import { useAppStore, appStore } from "./store";
 import Canvas from "./canvas/Canvas";
 import Editors from "./editor/Editors";
-import { SEED } from "./seed";
+import { EXAMPLES, type Example } from "./examples";
 import {
   newProject, listProjects, saveProject, deleteProject,
   getLastProjectId, setLastProjectId,
@@ -19,6 +19,8 @@ import { Toaster } from "@/components/ui/sonner";
 import RenameDialog from "@/components/RenameDialog";
 import CommandPalette from "@/components/CommandPalette";
 import AddComponent from "@/components/AddComponent";
+import NewProjectMenu from "@/components/NewProjectMenu";
+import HelpDialog from "@/components/HelpDialog";
 
 function IconButton({ label, onClick, children, variant = "secondary" }: {
   label: string; onClick: () => void; children: React.ReactNode;
@@ -61,9 +63,13 @@ export default function App() {
         if (found) active = found;
         else if (all.length) active = all[0];
         else {
-          active = { ...newProject("Example"), ...SEED };
-          await saveProject(active);
+          // first run: seed the example templates
+          for (const ex of EXAMPLES) {
+            await saveProject({ ...newProject(ex.name), structureText: ex.structureText, flowText: ex.flowText });
+          }
           all = await listProjects();
+          active = all[0];
+          toast("New here? Click the ? for a 30-second guide.", { duration: 6000 });
         }
       }
       setProjects(all);
@@ -93,8 +99,11 @@ export default function App() {
     await setLastProjectId(p.id);
   };
 
-  const createProject = async () => {
-    const p = { ...newProject(`Project ${projects.length + 1}`), ...SEED };
+  const createProject = async (tpl?: Example) => {
+    const base = newProject(tpl?.name ?? `Project ${projects.length + 1}`);
+    const p: Project = tpl
+      ? { ...base, structureText: tpl.structureText, flowText: tpl.flowText }
+      : base;
     await saveProject(p);
     setProjects(await listProjects());
     await switchTo(p);
@@ -120,18 +129,21 @@ export default function App() {
                 <span className="size-2.5 rounded-full bg-primary shadow-[0_0_10px] shadow-primary" />
                 system-design-maker
               </h1>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <button
-                    onClick={() => appStore.getState().setPaletteOpen(true)}
-                    className="flex items-center gap-1.5 rounded-md border border-border bg-background px-2 py-1 text-[11px] text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
-                  >
-                    <Search className="size-3" />
-                    <span className="font-sans">⌘K</span>
-                  </button>
-                </TooltipTrigger>
-                <TooltipContent>Command palette — actions, add components, jump to nodes</TooltipContent>
-              </Tooltip>
+              <div className="flex items-center gap-1.5">
+                <HelpDialog />
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <button
+                      onClick={() => appStore.getState().setPaletteOpen(true)}
+                      className="flex items-center gap-1.5 rounded-md border border-border bg-background px-2 py-1 text-[11px] text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
+                    >
+                      <Search className="size-3" />
+                      <span className="font-sans">⌘K</span>
+                    </button>
+                  </TooltipTrigger>
+                  <TooltipContent>Command palette — actions, add components, jump to nodes</TooltipContent>
+                </Tooltip>
+              </div>
             </div>
 
             <div className="flex gap-2">
@@ -144,7 +156,7 @@ export default function App() {
                   {projects.map((p) => <SelectItem key={p.id} value={p.id}>{p.name}</SelectItem>)}
                 </SelectContent>
               </Select>
-              <IconButton label="New project" onClick={createProject}><Plus /></IconButton>
+              <NewProjectMenu onCreate={createProject} />
               {currentId && projects.length > 1 && (
                 <IconButton label="Delete project" variant="ghost" onClick={() => removeProject(currentId)}>
                   <Trash2 />

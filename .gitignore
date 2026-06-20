@@ -2,3 +2,6 @@ node_modules/
 dist/
 *.local
 .DS_Store
+*.tsbuildinfo
+# emitted JS must never land in src (source is .ts/.tsx only)
+src/**/*.js

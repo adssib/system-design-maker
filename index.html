@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>system-design-maker — diagram-as-code, but the request moves</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <aside id="panel">
+    <h1><span class="dot"></span> system-design-maker</h1>
+    <p class="tagline">diagram-as-code, but the request actually moves.</p>
+
+    <label class="section">Flow DSL · synced with canvas</label>
+    <textarea id="dsl" spellcheck="false"></textarea>
+
+    <div class="controls">
+      <button id="send" class="primary">▶ Send request</button>
+      <button id="stop">■ Stop</button>
+      <button id="arrange">⤢ Auto-arrange</button>
+      <button id="clear" class="ghost-danger">⌫ Clear</button>
+    </div>
+
+    <div class="row">
+      <label>Speed</label>
+      <input id="speed" type="range" min="60" max="600" value="240" />
+    </div>
+    <div class="row">
+      <label class="toggle"><input id="loop" type="checkbox" /> Continuous traffic</label>
+    </div>
+
+    <div id="error"></div>
+
+    <div class="hint">
+      <b style="color:var(--text)">Fan-out:</b> <code>lb -&gt; [api1, api2]</code><br />
+      Node type &amp; color are inferred from the name (db, cache, queue, lb…).
+    </div>
+  </aside>
+
+  <main id="stage">
+    <svg id="canvas" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+          <feGaussianBlur stdDeviation="4" result="b" />
+          <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
+        <filter id="pglow" x="-300%" y="-300%" width="700%" height="700%">
+          <feGaussianBlur stdDeviation="3.2" result="b" />
+          <feMerge><feMergeNode in="b" /><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
+        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 1 L 9 5 L 0 9 z" fill="#3a465f" />
+        </marker>
+        <marker id="arrow-hot" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 1 L 9 5 L 0 9 z" fill="#5b9dff" />
+        </marker>
+      </defs>
+      <g id="g-edges"></g>
+      <g id="g-temp"></g>
+      <g id="g-nodes"></g>
+      <g id="g-particles" filter="url(#pglow)"></g>
+    </svg>
+
+    <div id="stagehint">
+      <b>Click</b> a node → send a request from it<br />
+      <b>Drag</b> body → move · <b>drag ○ handle</b> → connect<br />
+      <b>Double-click</b> canvas → add · node → rename<br />
+      <b>Del</b> → remove selected
+    </div>
+    <div id="legend"></div>
+  </main>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

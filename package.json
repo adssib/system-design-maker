@@ -1,0 +1,11 @@
+{
+  "name": "system-design-maker",
+  "version": "0.1.0",
+  "description": "Diagram-as-code, but the request actually moves. A DSL-first, fully interactive system-design canvas with animated request flow.",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["system-design", "diagram", "animation", "dsl", "architecture"],
+  "license": "MIT"
+}

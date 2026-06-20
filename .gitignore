@@ -5,3 +5,6 @@ dist/
 *.tsbuildinfo
 # emitted JS must never land in src (source is .ts/.tsx only)
 src/**/*.js
+
+# local screenshot helper (playwright)
+shot.mjs

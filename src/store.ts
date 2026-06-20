@@ -15,6 +15,7 @@ export interface AppState {
   positions: Record<string, { x: number; y: number }>;
   selection: string | null;
   renaming: string | null;
+  paletteOpen: boolean;
   structure: StructureParseResult;
   flow: FlowParseResult;
   validation: ValidationError[];
@@ -35,6 +36,7 @@ export interface AppState {
   moveNode: (id: string, x: number, y: number) => void;
   select: (id: string | null) => void;
   setRenaming: (id: string | null) => void;
+  setPaletteOpen: (open: boolean) => void;
   autoArrange: () => void;
   load: (structureText: string, flowText: string, positions: Record<string, { x: number; y: number }>) => void;
 }
@@ -71,6 +73,7 @@ export function createAppStore() {
       positions: {},
       selection: null,
       renaming: null,
+      paletteOpen: false,
       structure: empty(),
       flow: { name: null, steps: [], errors: [] },
       validation: [],
@@ -139,6 +142,8 @@ export function createAppStore() {
       select: (id) => set({ selection: id }),
 
       setRenaming: (id) => set({ renaming: id }),
+
+      setPaletteOpen: (open) => set({ paletteOpen: open }),
 
       autoArrange: () => {
         const { nodes, edges } = get().structure;

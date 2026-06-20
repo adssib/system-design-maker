@@ -2,27 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Dark-only palette, matched to the app. shadcn tokens as HSL triples. */
+/* Dark-only WARM palette (espresso base, beige/amber accents, cream text).
+   shadcn tokens as HSL triples. */
 :root {
-  --background: 222 42% 9%;       /* #0e1422 */
-  --foreground: 214 56% 93%;      /* #e6edf7 */
-  --card: 223 38% 12%;            /* #131a2b */
-  --card-foreground: 214 56% 93%;
-  --popover: 223 38% 12%;
-  --popover-foreground: 214 56% 93%;
-  --primary: 217 100% 68%;        /* #5b9dff */
-  --primary-foreground: 222 47% 11%;
-  --secondary: 222 41% 18%;       /* #1b2740 */
-  --secondary-foreground: 214 56% 93%;
-  --muted: 222 34% 16%;
-  --muted-foreground: 216 28% 65%; /* #8aa0c0 */
-  --accent: 169 73% 55%;          /* #36e0c0 */
-  --accent-foreground: 222 47% 11%;
-  --destructive: 0 72% 51%;       /* #dc2626 */
-  --destructive-foreground: 0 0% 100%;
-  --border: 222 34% 21%;          /* #243049 */
-  --input: 222 34% 21%;
-  --ring: 217 100% 68%;
+  --background: 30 24% 7%;        /* #15110d espresso */
+  --foreground: 39 50% 90%;       /* #f2e9d8 cream */
+  --card: 30 26% 9%;              /* #1d1711 */
+  --card-foreground: 39 50% 90%;
+  --popover: 30 26% 9%;
+  --popover-foreground: 39 50% 90%;
+  --primary: 37 47% 73%;          /* #d9c19a beige (buttons) */
+  --primary-foreground: 30 39% 10%; /* dark brown text on beige */
+  --secondary: 31 28% 16%;        /* #34291d brown */
+  --secondary-foreground: 39 40% 88%;
+  --muted: 31 26% 12%;
+  --muted-foreground: 38 23% 64%; /* #b8a98e taupe */
+  --accent: 34 70% 63%;           /* #e2a85e amber */
+  --accent-foreground: 30 39% 10%;
+  --destructive: 7 62% 57%;       /* warm red */
+  --destructive-foreground: 39 50% 95%;
+  --border: 32 29% 18%;           /* #3a2e20 */
+  --input: 32 29% 18%;
+  --ring: 34 70% 63%;
   --radius: 0.6rem;
 }
 

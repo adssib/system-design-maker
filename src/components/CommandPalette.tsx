@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useReactFlow } from "@xyflow/react";
 import { Play, Square, LayoutGrid, FilePlus2, Box } from "lucide-react";
 import {
@@ -9,14 +9,18 @@ import { typeOf } from "@/engine/typeInference";
 import { useAppStore, appStore } from "@/store";
 
 export default function CommandPalette({ onNewProject }: { onNewProject: () => void }) {
-  const [open, setOpen] = useState(false);
+  const open = useAppStore((s) => s.paletteOpen);
+  const setOpen = (o: boolean) => appStore.getState().setPaletteOpen(o);
   const nodes = useAppStore((s) => s.structure.nodes);
   const positions = useAppStore((s) => s.positions);
   const { setCenter, screenToFlowPosition } = useReactFlow();
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "k" && (e.metaKey || e.ctrlKey)) { e.preventDefault(); setOpen((o) => !o); }
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        appStore.getState().setPaletteOpen(!appStore.getState().paletteOpen);
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);

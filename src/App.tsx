@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ReactFlowProvider } from "@xyflow/react";
 import { toast } from "sonner";
-import { Play, Square, LayoutGrid, Plus, Trash2 } from "lucide-react";
+import { Play, Square, LayoutGrid, Plus, Trash2, Search } from "lucide-react";
 import { useAppStore, appStore } from "./store";
 import Canvas from "./canvas/Canvas";
 import Editors from "./editor/Editors";
@@ -120,7 +120,18 @@ export default function App() {
                 <span className="size-2.5 rounded-full bg-primary shadow-[0_0_10px] shadow-primary" />
                 system-design-maker
               </h1>
-              <kbd className="rounded border border-border bg-background px-1.5 py-0.5 text-[10px] text-muted-foreground">⌘K</kbd>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <button
+                    onClick={() => appStore.getState().setPaletteOpen(true)}
+                    className="flex items-center gap-1.5 rounded-md border border-border bg-background px-2 py-1 text-[11px] text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
+                  >
+                    <Search className="size-3" />
+                    <span className="font-sans">⌘K</span>
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent>Command palette — actions, add components, jump to nodes</TooltipContent>
+              </Tooltip>
             </div>
 
             <div className="flex gap-2">

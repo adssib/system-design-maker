@@ -1,11 +1,11 @@
-:root { --bg: #0e1422; --panel: #131a2b; --text: #e6edf7; --muted: #8aa0c0; }
+:root { --bg: #15110d; --panel: #1d1711; --text: #f2e9d8; --muted: #b8a98e; }
 * { box-sizing: border-box; }
 html, body, #root { height: 100%; margin: 0; }
 body { background: var(--bg); color: var(--text); font: 14px/1.4 ui-sans-serif, system-ui, sans-serif; }
 .app { display: flex; height: 100%; }
 
 .sysnode { position: relative; width: 150px; height: 52px; padding: 6px 12px 6px 15px; border-radius: 12px;
-  background: linear-gradient(180deg, #161f33, #111829); border: 1px solid #3a465f; color: var(--text);
+  background: linear-gradient(180deg, #241b12, #191209); border: 1px solid #4a3a28; color: var(--text);
   display: flex; align-items: center; gap: 10px; transition: box-shadow .15s ease, border-color .15s ease; }
 .sysnode-bar { position: absolute; left: 0; top: 7px; bottom: 7px; width: 5px; border-radius: 0 3px 3px 0; }
 .sysnode-icon { display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; flex: 0 0 24px; }
@@ -19,9 +19,23 @@ body { background: var(--bg); color: var(--text); font: 14px/1.4 ui-sans-serif, 
 
 .editors { display: flex; flex-direction: column; flex: 1; min-height: 0; }
 .tabs { display: flex; gap: 4px; }
-.tabs button { flex: 1; padding: 6px; background: var(--panel); color: var(--muted); border: 0; cursor: pointer; }
-.tabs button.active { color: var(--text); border-bottom: 2px solid #5b9dff; }
-.editors textarea { flex: 1; min-height: 0; resize: none; background: #0b1120; color: var(--text);
-  border: 1px solid #243049; border-radius: 8px; padding: 10px; font: 13px/1.5 ui-monospace, monospace; margin-top: 6px; }
+.tabs button { flex: 1; padding: 6px; background: transparent; color: var(--muted); border: 0; cursor: pointer; border-radius: 6px 6px 0 0; }
+.tabs button.active { color: var(--text); border-bottom: 2px solid #e2a85e; }
+.editors textarea { flex: 1; min-height: 0; resize: none; background: #120e0a; color: var(--text);
+  border: 1px solid #34291d; border-radius: 8px; padding: 10px; font: 13px/1.5 ui-monospace, monospace; margin-top: 6px; }
 .errors { max-height: 120px; overflow: auto; }
-.error { color: #ff9b9b; font-size: 12px; padding: 2px 0; }
+.error { color: #e6927e; font-size: 12px; padding: 2px 0; }
+
+/* --- React Flow theming (Tailwind Preflight strips its defaults; restore + warm) --- */
+.react-flow__controls { border-radius: 8px; overflow: hidden; border: 1px solid #34291d;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, .45); }
+.react-flow__controls-button { background: #1d1711; border-bottom: 1px solid #34291d;
+  width: 26px; height: 26px; }
+.react-flow__controls-button:hover { background: #2a2018; }
+.react-flow__controls-button svg { fill: #d6c4a4; max-width: 13px; max-height: 13px; }
+.react-flow__attribution { background: transparent; color: #6b5e4c; }
+.react-flow__handle { background: #e2a85e; border: 1px solid #15110d; width: 7px; height: 7px; }
+.react-flow__edge-path { stroke: #4a3e2e; stroke-width: 1.5; }
+.react-flow__edge.selected .react-flow__edge-path,
+.react-flow__edge:hover .react-flow__edge-path { stroke: #e2a85e; }
+.react-flow__connectionline .react-flow__edge-path { stroke: #e2a85e; }

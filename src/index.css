@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Dark-only palette, matched to the app. shadcn tokens as HSL triples. */
+:root {
+  --background: 222 42% 9%;       /* #0e1422 */
+  --foreground: 214 56% 93%;      /* #e6edf7 */
+  --card: 223 38% 12%;            /* #131a2b */
+  --card-foreground: 214 56% 93%;
+  --popover: 223 38% 12%;
+  --popover-foreground: 214 56% 93%;
+  --primary: 217 100% 68%;        /* #5b9dff */
+  --primary-foreground: 222 47% 11%;
+  --secondary: 222 41% 18%;       /* #1b2740 */
+  --secondary-foreground: 214 56% 93%;
+  --muted: 222 34% 16%;
+  --muted-foreground: 216 28% 65%; /* #8aa0c0 */
+  --accent: 169 73% 55%;          /* #36e0c0 */
+  --accent-foreground: 222 47% 11%;
+  --destructive: 0 72% 51%;       /* #dc2626 */
+  --destructive-foreground: 0 0% 100%;
+  --border: 222 34% 21%;          /* #243049 */
+  --input: 222 34% 21%;
+  --ring: 217 100% 68%;
+  --radius: 0.6rem;
+}
+
+* { border-color: hsl(var(--border)); }

@@ -21,6 +21,8 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
+    "gifenc": "^1.0.3",
+    "html-to-image": "^1.11.13",
     "idb-keyval": "^6.2.1",
     "lucide-react": "^1.21.0",
     "react": "^18.3.1",

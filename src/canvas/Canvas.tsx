@@ -7,6 +7,7 @@ import {
 import { useAppStore, appStore } from "../store";
 import SystemNode from "./SystemNode";
 import Particles from "../engine/Particles";
+import ExportMenu from "../components/ExportMenu";
 
 const nodeTypes = { system: SystemNode };
 
@@ -82,6 +83,7 @@ export default function Canvas() {
       >
         <Background />
         <Controls />
+        <ExportMenu />
         <Particles />
       </ReactFlow>
     </div>

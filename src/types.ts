@@ -25,6 +25,15 @@ export interface FlowParseResult {
   errors: ParseError[];
 }
 
+export interface ParsedFlow {
+  name: string;
+  steps: FlowStep[];
+}
+export interface FlowsParseResult {
+  flows: ParsedFlow[];
+  errors: ParseError[];
+}
+
 export interface ValidationError { line: number; message: string; }
 
 export type ParticleDir = "forward" | "back";

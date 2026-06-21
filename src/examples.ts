@@ -34,7 +34,13 @@ worker  -> postgres`,
   gateway <-> auth
   gateway -> orders
   orders  <-> postgres
-  orders  ~> kafka`,
+  orders  ~> kafka
+
+flow "GET /users/:id":
+  client  -> gateway
+  gateway <-> auth
+  gateway -> users
+  users   <-> postgres`,
   },
   {
     name: "High-scale system",
@@ -57,5 +63,65 @@ analytics -> elasticsearch`,
   api     <-> postgres
   api     ~> kafka
   api     ~> s3`,
+  },
+  {
+    name: "URL shortener",
+    structureText: `client -> nginx
+nginx  -> api
+api    -> redis
+api    -> postgres`,
+    flowText: `flow "POST /shorten":
+  client -> nginx
+  nginx  -> api
+  api    <-> postgres
+  api    -> redis
+
+flow "GET /:slug":
+  client -> nginx
+  nginx  -> api
+  api    -> redis
+  api    <-> postgres`,
+  },
+  {
+    name: "Real-time chat",
+    structureText: `client  -> gateway
+gateway -> ws
+ws      -> redis
+ws      -> kafka
+kafka   -> worker
+worker  -> postgres`,
+    flowText: `flow "send message":
+  client  -> gateway
+  gateway -> ws
+  ws      -> redis
+  ws      ~> kafka`,
+  },
+  {
+    name: "E-commerce",
+    structureText: `client  -> cdn
+cdn     -> gateway
+gateway -> [catalog, cart, orders]
+catalog -> redis
+catalog -> postgres
+cart    -> redis
+orders  -> postgres
+orders  -> kafka
+kafka   -> worker
+worker  -> postgres`,
+    flowText: `flow "Browse products":
+  client  -> cdn
+  cdn     -> gateway
+  gateway -> catalog
+  catalog -> redis
+  catalog <-> postgres
+
+flow "Checkout":
+  client  -> cdn
+  cdn     -> gateway
+  gateway -> cart
+  cart    -> redis
+  gateway -> orders
+  orders  <-> postgres
+  orders  ~> kafka`,
   },
 ];

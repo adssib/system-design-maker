@@ -1,11 +1,11 @@
 import { createStore, useStore } from "zustand";
 import type {
-  StructureParseResult, FlowParseResult, ValidationError, NodeModel, EdgeModel,
+  StructureParseResult, ParsedFlow, ValidationError, ParseError, NodeModel, EdgeModel,
 } from "./types";
 import { parseStructure } from "./dsl/structure";
 import { serializeStructure } from "./dsl/serialize";
-import { parseFlow } from "./dsl/flow";
-import { validate } from "./dsl/validate";
+import { parseFlows } from "./dsl/flow";
+import { validateFlows } from "./dsl/validate";
 import { layeredPositions } from "./engine/layout";
 import { typeOf } from "./engine/typeInference";
 
@@ -17,7 +17,10 @@ export interface AppState {
   renaming: string | null;
   paletteOpen: boolean;
   structure: StructureParseResult;
-  flow: FlowParseResult;
+  flows: ParsedFlow[];
+  flow: ParsedFlow;
+  flowErrors: ParseError[];
+  activeFlowName: string | null;
   validation: ValidationError[];
 
   playToken: number;
@@ -31,6 +34,7 @@ export interface AppState {
 
   setStructureText: (t: string) => void;
   setFlowText: (t: string) => void;
+  setActiveFlow: (name: string) => void;
   addNode: (x: number, y: number, base?: string) => string;
   addEdge: (from: string, to: string) => void;
   deleteNode: (id: string) => void;
@@ -58,15 +62,15 @@ export function createAppStore() {
       return next;
     };
 
-    const revalidate = (structure: StructureParseResult, flow: FlowParseResult) =>
-      validate(structure, flow);
+    const revalidate = (structure: StructureParseResult, flows: ParsedFlow[]) =>
+      validateFlows(structure, flows);
 
     // apply a mutated structure model (canvas path): regenerate text, keep no-loop invariant
     const applyModel = (nodes: NodeModel[], edges: EdgeModel[]) => {
       const structure: StructureParseResult = { nodes, edges, errors: [] };
       const positions = layoutMissing(nodes, edges, get().positions);
       const structureText = serializeStructure(nodes, edges);
-      set({ structure, structureText, positions, validation: revalidate(structure, get().flow) });
+      set({ structure, structureText, positions, validation: revalidate(structure, get().flows) });
     };
 
     return {
@@ -77,7 +81,10 @@ export function createAppStore() {
       renaming: null,
       paletteOpen: false,
       structure: empty(),
-      flow: { name: null, steps: [], errors: [] },
+      flows: [],
+      flow: { name: "", steps: [] },
+      flowErrors: [],
+      activeFlowName: null,
       validation: [],
 
       playToken: 0,
@@ -92,12 +99,20 @@ export function createAppStore() {
       setStructureText: (t) => {
         const structure = parseStructure(t);
         const positions = layoutMissing(structure.nodes, structure.edges, get().positions);
-        set({ structureText: t, structure, positions, validation: revalidate(structure, get().flow) });
+        set({ structureText: t, structure, positions, validation: revalidate(structure, get().flows) });
       },
 
       setFlowText: (t) => {
-        const flow = parseFlow(t);
-        set({ flowText: t, flow, validation: revalidate(get().structure, flow) });
+        const { flows, errors } = parseFlows(t);
+        const prev = get().activeFlowName;
+        const activeFlowName = prev && flows.some((f) => f.name === prev) ? prev : flows[0]?.name ?? null;
+        const flow = flows.find((f) => f.name === activeFlowName) ?? { name: "", steps: [] };
+        set({ flowText: t, flows, flow, flowErrors: errors, activeFlowName, validation: revalidate(get().structure, flows) });
+      },
+
+      setActiveFlow: (name) => {
+        const flow = get().flows.find((f) => f.name === name) ?? { name: "", steps: [] };
+        set({ activeFlowName: name, flow });
       },
 
       addNode: (x, y, base = "service") => {
@@ -156,9 +171,15 @@ export function createAppStore() {
 
       load: (structureText, flowText, positions) => {
         const structure = parseStructure(structureText);
-        const flow = parseFlow(flowText);
+        const { flows, errors } = parseFlows(flowText);
+        const activeFlowName = flows[0]?.name ?? null;
+        const flow = flows[0] ?? { name: "", steps: [] };
         const filled = layoutMissing(structure.nodes, structure.edges, positions);
-        set({ structureText, flowText, positions: filled, structure, flow, validation: validate(structure, flow), selection: null });
+        set({
+          structureText, flowText, positions: filled, structure,
+          flows, flow, flowErrors: errors, activeFlowName,
+          validation: validateFlows(structure, flows), selection: null,
+        });
       },
     };
   });

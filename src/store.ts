@@ -23,9 +23,11 @@ export interface AppState {
   playToken: number;
   playAt: number;
   speed: number;
+  captureTime: number | null;
   setSpeed: (v: number) => void;
   play: () => void;
   stop: () => void;
+  setCaptureTime: (t: number | null) => void;
 
   setStructureText: (t: string) => void;
   setFlowText: (t: string) => void;
@@ -81,9 +83,11 @@ export function createAppStore() {
       playToken: 0,
       playAt: 0,
       speed: 240,
+      captureTime: null,
       setSpeed: (v) => set({ speed: v }),
       play: () => set({ playToken: get().playToken + 1, playAt: performance.now() }),
       stop: () => set({ playToken: 0 }),
+      setCaptureTime: (t) => set({ captureTime: t }),
 
       setStructureText: (t) => {
         const structure = parseStructure(t);

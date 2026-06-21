@@ -9,7 +9,7 @@ import { appStore, useAppStore } from "@/store";
 export default function ExportMenu() {
   const [open, setOpen] = useState(false);
   const [busy, setBusy] = useState(false);
-  const { getNodes } = useReactFlow();
+  const { getNodes, getViewport, setViewport } = useReactFlow();
   const steps = useAppStore((s) => s.flow.steps.length);
 
   const png = async () => {
@@ -28,16 +28,26 @@ export default function ExportMenu() {
     setOpen(false);
     if (busy) return;
     setBusy(true);
-    const t = toast.loading("Recording flow… (keep this tab focused)");
+    const t = toast.loading("Recording flow… 0%");
     try {
       const { recordGif } = await import("@/export");
-      appStore.getState().play();
-      await recordGif({ durationMs: Math.min(9000, Math.max(3000, steps * 1400)) });
+      const st = appStore.getState();
+      await recordGif({
+        nodes: getNodes(),
+        nodeTypes: new Map(st.structure.nodes.map((n) => [n.id, n.type])),
+        edges: st.structure.edges,
+        steps: st.flow.steps,
+        speed: st.speed,
+        setCaptureTime: (tt) => appStore.getState().setCaptureTime(tt),
+        getViewport,
+        setViewport,
+        onProgress: (p) => toast.loading(`Recording flow… ${Math.round(p * 100)}%`, { id: t }),
+      });
       toast.success("Saved flow.gif", { id: t });
     } catch {
       toast.error("GIF export failed", { id: t });
     } finally {
-      appStore.getState().stop();
+      appStore.getState().setCaptureTime(null);
       setBusy(false);
     }
   };

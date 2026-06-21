@@ -38,6 +38,7 @@ export interface AppState {
   addNode: (x: number, y: number, base?: string) => string;
   addEdge: (from: string, to: string) => void;
   deleteNode: (id: string) => void;
+  deleteEdge: (from: string, to: string) => void;
   renameNode: (oldId: string, nextId: string) => void;
   moveNode: (id: string, x: number, y: number) => void;
   select: (id: string | null) => void;
@@ -139,6 +140,11 @@ export function createAppStore() {
         delete positions[id];
         set({ positions, selection: get().selection === id ? null : get().selection });
         applyModel(nodes, edges);
+      },
+
+      deleteEdge: (from, to) => {
+        const edges = get().structure.edges.filter((e) => !(e.from === from && e.to === to));
+        applyModel(get().structure.nodes, edges);
       },
 
       renameNode: (oldId, nextId) => {

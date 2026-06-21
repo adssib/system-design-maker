@@ -2,7 +2,7 @@ import { useCallback, useEffect } from "react";
 import {
   ReactFlow, Background, Controls,
   useNodesState, useEdgesState, useReactFlow, MarkerType,
-  type Node, type Edge, type NodeChange, type Connection,
+  type Node, type Edge, type NodeChange, type EdgeChange, type Connection,
 } from "@xyflow/react";
 import { useAppStore, appStore } from "../store";
 import SystemNode from "./SystemNode";
@@ -64,9 +64,20 @@ export default function Canvas() {
   const handleNodesChange = useCallback((changes: NodeChange[]) => {
     onNodesChange(changes);
     for (const c of changes) {
-      if (c.type === "select") appStore.getState().select(c.selected ? c.id : null);
+      if (c.type === "remove") appStore.getState().deleteNode(c.id);
+      else if (c.type === "select") appStore.getState().select(c.selected ? c.id : null);
     }
   }, [onNodesChange]);
+
+  const handleEdgesChange = useCallback((changes: EdgeChange[]) => {
+    onEdgesChange(changes);
+    for (const c of changes) {
+      if (c.type === "remove") {
+        const [from, to] = c.id.split("->");
+        if (from && to) appStore.getState().deleteEdge(from, to);
+      }
+    }
+  }, [onEdgesChange]);
 
   const onNodeDragStop = useCallback((_: unknown, node: Node) => {
     appStore.getState().moveNode(node.id, node.position.x, node.position.y);
@@ -87,9 +98,10 @@ export default function Canvas() {
         edges={edges}
         nodeTypes={nodeTypes}
         onNodesChange={handleNodesChange}
-        onEdgesChange={onEdgesChange}
+        onEdgesChange={handleEdgesChange}
         onNodeDragStop={onNodeDragStop}
         onConnect={onConnect}
+        deleteKeyCode={["Backspace", "Delete"]}
         onNodeDoubleClick={onNodeDoubleClick}
         onPaneClick={() => appStore.getState().select(null)}
         fitView

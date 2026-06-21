@@ -27,6 +27,7 @@ import { Toaster } from "@/components/ui/sonner";
 import RenameDialog from "@/components/RenameDialog";
 import CommandPalette from "@/components/CommandPalette";
 import AddComponent from "@/components/AddComponent";
+import FlowSelector from "@/components/FlowSelector";
 import NewProjectMenu from "@/components/NewProjectMenu";
 import HelpDialog from "@/components/HelpDialog";
 
@@ -199,6 +200,7 @@ export default function App() {
 
             <Editors />
 
+            <FlowSelector />
             <div className="flex gap-2">
               <Button className="flex-1" onClick={() => appStore.getState().play()}><Play /> Send request</Button>
               <IconButton label="Stop" onClick={() => appStore.getState().stop()}><Square /></IconButton>

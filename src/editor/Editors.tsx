@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useAppStore, appStore } from "../store";
 import CodeEditor from "./CodeEditor";
-import FlowSelector from "../components/FlowSelector";
 
 export default function Editors() {
   const [tab, setTab] = useState<"structure" | "flow">("structure");
@@ -24,7 +23,6 @@ export default function Editors() {
         <button className={isStructure ? "active" : ""} onClick={() => setTab("structure")}>Structure</button>
         <button className={!isStructure ? "active" : ""} onClick={() => setTab("flow")}>Flow</button>
       </div>
-      {!isStructure && <FlowSelector />}
       <CodeEditor
         value={value}
         onChange={onChange}

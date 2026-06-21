@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { ReactFlowProvider } from "@xyflow/react";
 import { toast } from "sonner";
-import { Play, Square, LayoutGrid, Trash2, Search } from "lucide-react";
+import { Play, Square, LayoutGrid, Trash2, Search, Menu, X } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 function GithubIcon() {
   return (
@@ -49,6 +50,7 @@ function IconButton({ label, onClick, children, variant = "secondary" }: {
 export default function App() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [currentId, setCurrentId] = useState<string | null>(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false); // mobile drawer
   const speed = useAppStore((s) => s.speed);
   const structureText = useAppStore((s) => s.structureText);
   const flowText = useAppStore((s) => s.flowText);
@@ -109,9 +111,12 @@ export default function App() {
 
   const switchTo = async (p: Project) => {
     setCurrentId(p.id);
+    setSidebarOpen(false);
     appStore.getState().load(p.structureText, p.flowText, p.positions);
     await setLastProjectId(p.id);
   };
+
+  const play = () => { setSidebarOpen(false); appStore.getState().play(); };
 
   const createProject = async (tpl?: Example) => {
     const base = newProject(tpl?.name ?? `Project ${projects.length + 1}`);
@@ -139,7 +144,28 @@ export default function App() {
     <TooltipProvider delayDuration={250}>
       <ReactFlowProvider>
         <div className="app">
-          <aside className="flex h-full w-[360px] flex-col gap-3 border-r border-border bg-card p-3.5">
+          {/* mobile: open-sidebar button (hidden on md+) */}
+          <button
+            onClick={() => setSidebarOpen(true)}
+            aria-label="Open menu"
+            className="absolute left-3 top-3 z-20 flex size-10 items-center justify-center rounded-lg border border-border bg-card text-foreground shadow-lg md:hidden"
+          >
+            <Menu className="size-5" />
+          </button>
+
+          {/* mobile: backdrop when the drawer is open */}
+          {sidebarOpen && (
+            <div className="fixed inset-0 z-30 bg-black/55 md:hidden" onClick={() => setSidebarOpen(false)} />
+          )}
+
+          <aside
+            className={cn(
+              "flex h-full w-[360px] flex-col gap-3 border-r border-border bg-card p-3.5",
+              "max-md:fixed max-md:inset-y-0 max-md:left-0 max-md:z-40 max-md:w-[88vw] max-md:max-w-[360px] max-md:shadow-2xl",
+              "max-md:transition-transform max-md:duration-200",
+              sidebarOpen ? "max-md:translate-x-0" : "max-md:-translate-x-full"
+            )}
+          >
             <div className="flex items-center justify-between">
               <h1 className="flex items-center gap-2 text-[15px] font-semibold">
                 <img src={`${import.meta.env.BASE_URL}favicon.svg`} alt="" width={20} height={20} />
@@ -162,6 +188,13 @@ export default function App() {
                   <TooltipContent>View source on GitHub</TooltipContent>
                 </Tooltip>
                 <HelpDialog />
+                <button
+                  onClick={() => setSidebarOpen(false)}
+                  aria-label="Close menu"
+                  className="flex size-7 items-center justify-center rounded-md border border-border bg-background text-muted-foreground hover:text-foreground md:hidden"
+                >
+                  <X className="size-4" />
+                </button>
               </div>
             </div>
 
@@ -204,7 +237,7 @@ export default function App() {
 
             <FlowSelector />
             <div className="flex gap-2">
-              <Button className="flex-1" onClick={() => appStore.getState().play()}><Play /> Send request</Button>
+              <Button className="flex-1" onClick={play}><Play /> Send request</Button>
               <IconButton label="Stop" onClick={() => appStore.getState().stop()}><Square /></IconButton>
               <IconButton label="Auto-arrange" onClick={() => appStore.getState().autoArrange()}><LayoutGrid /></IconButton>
             </div>

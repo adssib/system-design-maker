@@ -59,6 +59,14 @@ export default function Canvas() {
     return () => clearTimeout(id);
   }, [nodeIds, fitView]);
 
+  // keep the diagram framed on viewport resize / orientation change
+  useEffect(() => {
+    let t = 0;
+    const onResize = () => { clearTimeout(t); t = window.setTimeout(() => fitView({ padding: 0.2 }), 120); };
+    window.addEventListener("resize", onResize);
+    return () => { clearTimeout(t); window.removeEventListener("resize", onResize); };
+  }, [fitView]);
+
   // apply RF changes (incl. dimensions/selection) into RF state, and mirror
   // selection into the store.
   const handleNodesChange = useCallback((changes: NodeChange[]) => {
@@ -102,6 +110,7 @@ export default function Canvas() {
         onNodeDragStop={onNodeDragStop}
         onConnect={onConnect}
         deleteKeyCode={["Backspace", "Delete"]}
+        minZoom={0.2}
         onNodeDoubleClick={onNodeDoubleClick}
         onPaneClick={() => appStore.getState().select(null)}
         fitView

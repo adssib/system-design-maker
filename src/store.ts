@@ -6,7 +6,7 @@ import { parseStructure } from "./dsl/structure";
 import { serializeStructure } from "./dsl/serialize";
 import { parseFlows } from "./dsl/flow";
 import { validateFlows } from "./dsl/validate";
-import { layeredPositions } from "./engine/layout";
+import { dagreLayout } from "./engine/dagreLayout";
 import { typeOf } from "./engine/typeInference";
 
 export interface AppState {
@@ -57,7 +57,7 @@ export function createAppStore() {
     ) => {
       const next: Record<string, { x: number; y: number }> = {};
       const missing = nodes.filter((n) => !prev[n.id]).map((n) => n.id);
-      const laid = missing.length ? layeredPositions(nodes.map((n) => n.id), edges) : {};
+      const laid = missing.length ? dagreLayout(nodes.map((n) => n.id), edges) : {};
       for (const n of nodes) next[n.id] = prev[n.id] ?? laid[n.id];
       return next;
     };
@@ -166,7 +166,7 @@ export function createAppStore() {
 
       autoArrange: () => {
         const { nodes, edges } = get().structure;
-        set({ positions: layeredPositions(nodes.map((n) => n.id), edges) });
+        set({ positions: dagreLayout(nodes.map((n) => n.id), edges) });
       },
 
       load: (structureText, flowText, positions) => {

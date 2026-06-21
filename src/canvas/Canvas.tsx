@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from "react";
 import {
   ReactFlow, Background, Controls,
-  useNodesState, useEdgesState, MarkerType,
+  useNodesState, useEdgesState, useReactFlow, MarkerType,
   type Node, type Edge, type NodeChange, type Connection,
 } from "@xyflow/react";
 import { useAppStore, appStore } from "../store";
@@ -20,6 +20,7 @@ export default function Canvas() {
   // source of truth for *structure*; we sync it in via effects below.
   const [nodes, setNodes, onNodesChange] = useNodesState<Node>([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
+  const { fitView } = useReactFlow();
 
   // store structure + positions -> React Flow nodes, preserving `measured`
   // for ids that survive so they stay visible across re-syncs.
@@ -50,6 +51,13 @@ export default function Canvas() {
       markerEnd: { type: MarkerType.ArrowClosed, color: "#9a8c78", width: 18, height: 18 },
     })));
   }, [structure.edges, setEdges]);
+
+  // re-frame the view when the set of nodes changes (project switch, add/remove)
+  const nodeIds = structure.nodes.map((n) => n.id).join(",");
+  useEffect(() => {
+    const id = setTimeout(() => fitView({ duration: 300, padding: 0.2 }), 80);
+    return () => clearTimeout(id);
+  }, [nodeIds, fitView]);
 
   // apply RF changes (incl. dimensions/selection) into RF state, and mirror
   // selection into the store.

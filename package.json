@@ -12,6 +12,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
+    "@dagrejs/dagre": "^3.0.0",
     "@radix-ui/react-dialog": "^1.1.17",
     "@radix-ui/react-popover": "^1.1.17",
     "@radix-ui/react-select": "^2.3.1",

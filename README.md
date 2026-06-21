@@ -16,6 +16,12 @@ hop by hop, like stepping a debugger across your architecture.
 &nbsp;![no backend](https://img.shields.io/badge/backend-none-46d369)
 &nbsp;![TypeScript](https://img.shields.io/badge/TypeScript-strict-5b9dff)
 
+<br/>
+
+<img src="docs/demo.gif" alt="A request animating hop-by-hop through a microservices diagram" width="780" />
+
+<sub>A request animating through the <code>Microservices</code> example — exported straight from the app.</sub>
+
 </div>
 
 ---

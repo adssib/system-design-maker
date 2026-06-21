@@ -54,6 +54,7 @@ export interface Project {
   flowText: string;
   positions: Record<string, { x: number; y: number }>;
   updatedAt: number;
+  isExample?: boolean; // seeded starter — cannot be deleted
 }
 
 export const edgeKey = (from: string, to: string): string => `${from}->${to}`;

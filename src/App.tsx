@@ -51,10 +51,16 @@ export default function App() {
       // seed the example projects once — also for users whose storage predates them
       if (!(await examplesSeeded())) {
         for (const ex of EXAMPLES) {
-          await saveProject({ ...newProject(ex.name), structureText: ex.structureText, flowText: ex.flowText });
+          await saveProject({ ...newProject(ex.name), structureText: ex.structureText, flowText: ex.flowText, isExample: true });
         }
         await markExamplesSeeded();
         toast("New here? Click the ? for a 30-second guide.", { duration: 6000 });
+      }
+
+      // protect example projects that were seeded before the isExample flag existed
+      const exampleNames = new Set(EXAMPLES.map((e) => e.name));
+      for (const p of await listProjects()) {
+        if (!p.isExample && exampleNames.has(p.name)) await saveProject({ ...p, isExample: true });
       }
 
       const shared = decodeShare(location.hash);
@@ -109,7 +115,9 @@ export default function App() {
   };
 
   const removeProject = async (id: string) => {
-    const name = projects.find((p) => p.id === id)?.name ?? "project";
+    const target = projects.find((p) => p.id === id);
+    if (target?.isExample) return; // seeded examples are protected
+    const name = target?.name ?? "project";
     await deleteProject(id);
     const all = await listProjects();
     setProjects(all);
@@ -141,7 +149,7 @@ export default function App() {
                 </SelectContent>
               </Select>
               <NewProjectMenu onCreate={createProject} />
-              {currentId && projects.length > 1 && (
+              {currentId && projects.length > 1 && !projects.find((p) => p.id === currentId)?.isExample && (
                 <IconButton label="Delete project" variant="ghost" onClick={() => removeProject(currentId)}>
                   <Trash2 />
                 </IconButton>

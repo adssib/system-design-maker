@@ -28,6 +28,7 @@ import RenameDialog from "@/components/RenameDialog";
 import CommandPalette from "@/components/CommandPalette";
 import AddComponent from "@/components/AddComponent";
 import FlowSelector from "@/components/FlowSelector";
+import ShareButton from "@/components/ShareButton";
 import NewProjectMenu from "@/components/NewProjectMenu";
 import HelpDialog from "@/components/HelpDialog";
 
@@ -145,6 +146,7 @@ export default function App() {
                 system-design-maker
               </h1>
               <div className="flex items-center gap-1.5">
+                <ShareButton />
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <a

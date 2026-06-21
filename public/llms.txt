@@ -1,0 +1,29 @@
+# system-design-maker
+
+> Diagram-as-code, but the request actually moves. A zero-backend, browser-based tool that renders system-architecture diagrams from a custom two-file DSL and animates a request flowing through them in real time.
+
+system-design-maker splits a system into two small text files: a **structure** file (the components and the connections that are possible) and a **flow** file (an ordered, timed trace of how one request behaves — line order is time order). The structure renders an interactive diagram; the flow compiles into timed particles that animate along the edges, like stepping a debugger across your architecture. Everything runs client-side — projects persist in the browser via IndexedDB and share through a URL hash. Built with React, TypeScript, React Flow, and Vite; deployed to GitHub Pages via GitHub Actions. No backend.
+
+## Flow DSL verbs
+
+- `->` one-way call (advances the clock)
+- `<->` call and response — the particle travels out, then back (advances by both legs)
+- `~>` async / fire-and-forget (does not advance the clock)
+- `(label)` rides along on the particle as a tag (e.g. hit, miss, 429)
+
+## Links
+
+- [Live demo](https://adssib.github.io/system-design-maker/): the running application
+- [Source repository](https://github.com/adssib/system-design-maker): GitHub, MIT-licensed
+- [README](https://github.com/adssib/system-design-maker/blob/main/README.md): overview, the DSL, and deploy notes
+- [Architecture diagram](https://github.com/adssib/system-design-maker/blob/main/docs/architecture.png): how the layers fit together
+
+## Features
+
+- Two-file structure/flow DSL with a hand-written parser and cross-file validation
+- Real-time particle animation of a request via a custom SVG overlay on top of React Flow
+- Multiple named flows per project, picked with a flow selector
+- Two-way sync: editing the diagram rewrites the DSL, and editing the DSL re-renders the diagram
+- Auto-layout (dagre), DSL syntax highlighting, and a Cmd/Ctrl+K command palette
+- Export the static diagram as a PNG, or the animated flow as a GIF
+- Local-first: IndexedDB persistence, multiple projects, URL-hash sharing, zero backend

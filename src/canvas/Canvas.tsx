@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from "react";
 import {
-  ReactFlow, Background, Controls,
+  ReactFlow, Background, Controls, Panel,
   useNodesState, useEdgesState, useReactFlow, MarkerType,
   type Node, type Edge, type NodeChange, type EdgeChange, type Connection,
 } from "@xyflow/react";
@@ -110,6 +110,17 @@ export default function Canvas() {
         <Controls />
         <ExportMenu />
         <Particles />
+        {structure.nodes.length === 0 && (
+          <Panel position="top-center">
+            <div className="pointer-events-none mt-[26vh] flex flex-col items-center gap-1 text-center">
+              <div className="text-sm font-medium text-foreground">Your canvas is empty</div>
+              <div className="text-xs text-muted-foreground">
+                Type in the <b className="text-foreground">Structure</b> tab, hit{" "}
+                <b className="text-foreground">+ Add component</b>, or open an example from the project menu.
+              </div>
+            </div>
+          </Panel>
+        )}
       </ReactFlow>
     </div>
   );
